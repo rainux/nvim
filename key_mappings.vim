@@ -1,0 +1,324 @@
+" ----------------------------------------------------------------------------
+" Key mappings
+"
+" Navigate in content and command line  ................................. {{{1
+"
+" Up & Down   Navigate display line upward & downward
+map <Up> gk
+map <Down> gj
+imap <Up> <Esc><Up>a
+imap <Down> <Esc><Down>a
+
+" Emacs-style editing on the command-line
+"
+" start of line
+cnoremap <C-A>         <Home>
+" back one character
+cnoremap <C-B>         <Left>
+" delete character under cursor
+cnoremap <C-D>         <Del>
+" end of line
+cnoremap <C-E>         <End>
+" forward one character
+cnoremap <C-F>         <Right>
+" recall newer command-line
+cnoremap <C-N>         <Down>
+" recall previous (older) command-line
+cnoremap <C-P>         <Up>
+" back one word
+cnoremap <Esc><C-B>    <S-Left>
+" forward one word
+cnoremap <Esc><C-F>    <S-Right>
+" ....................................................................... }}}1
+
+" Navigate between windows and tabs  .................................... {{{1
+"
+" CTRL-[JKHL] Jump between windows
+noremap <C-J> <C-W>j
+noremap <C-K> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
+
+" CTRL-Tab        Next tab
+map <C-Tab> gt
+imap <C-Tab> <Esc>gt
+cmap <C-Tab> <Esc>gt
+
+" CTRL-SHIFT-Tab  Previous tab
+map <C-S-Tab> gT
+imap <C-S-Tab> <Esc>gT
+cmap <C-S-Tab> <Esc>gT
+
+" ALT-[1-9]   Switch to specified tab
+for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	execute 'map <M-' . i . '> ' . i . 'gt'
+	execute 'imap <M-' . i . '> <Esc>' . i . 'gt'
+	execute 'cmap <M-' . i . '> <Esc>' . i . 'gt'
+endfor
+
+" ⌘-[1-9]   Switch to specified tab
+for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	exec printf('map <D-%d> %dgt', i, i)
+	exec printf('imap <D-%d> <Esc>%dgta', i, i)
+endfor
+map <D-0> :tablast<CR>
+imap <D-0> <Esc>:tablast<CR>a
+" ....................................................................... }}}1
+
+" Windows convention compatibility  ..................................... {{{1
+"
+" CTRL-X and SHIFT-Del are Cut
+vnoremap <C-X> "+x
+vnoremap <S-Del> "+x
+
+" CTRL-C and CTRL-Insert are Copy
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+
+" CTRL-V and SHIFT-Insert are Paste
+map <C-V>		"+gP
+map <S-Insert>		"+gP
+
+cmap <C-V>		<C-R>+
+cmap <S-Insert>		<C-R>+
+"  ...................................................................... }}}1
+
+" Essential toggles  .................................................... {{{1
+"
+" ,k    Toggle iskeyword contain or not contain '_'
+map ,k  :call <SID>ToggleIsKeyword('_')<CR>
+function! s:ToggleIsKeyword(char) " ..................................... {{{2
+  if stridx(&iskeyword, a:char) < 0
+    exec 'setlocal iskeyword+=' . a:char
+    echo '&iskeyword now contain "' . a:char . '"'
+  else
+    exec 'setlocal iskeyword-=' . a:char
+    echo '&iskeyword now not contain "' . a:char . '"'
+  endif
+endfunction " ........................................................... }}}2
+" ,tc   Toggle columns
+map ,tc :call <SID>ToggleColumns()<CR>
+function! s:ToggleColumns() " ........................................... {{{2
+  if &number
+    set colorcolumn=0
+    set nonumber
+    set signcolumn=no
+    echo 'Collumns disabled'
+  else
+    set colorcolumn=+1
+    set number
+    set signcolumn=yes
+    echo 'Collumns enabled'
+  endif
+endfunction " ........................................................... }}}2
+" ,hs   Toggle hlsearch
+map ,hs :set hlsearch!<CR>
+" ,sp   Toggle spell check
+map ,sp :set spell!<CR>
+" ,nt   Toggle NvimTree
+map ,nt :NvimTreeToggle<CR>
+" ,nf   NvimTreeFindFile
+map ,nf :NvimTreeFindFile<CR>
+" ,nr   Netrw Explorer
+map ,nr :Explore<CR>
+" ,ve   Netrw Vertial Explorer
+map ,ve :Vexplore<CR>
+" ,tl   Toggle Tagbar
+map ,tl :TagbarToggle<CR>
+" ,al   Toggle ALE linting
+map ,al :ALEToggle<CR>
+" ....................................................................... }}}1
+
+" Search & Replace  ..................................................... {{{1
+"
+" ,*    Substitute(Replace)
+nmap ,* :%s/<C-R><C-W>/
+" ,rg   Search in files via rg
+nmap ,rg :execute 'Rg ' . input("Rg search for pattern: ", "<C-R><C-W>")<CR>
+" Search and grep using Telescope
+nnoremap ,cf <Cmd>Telescope find_files<CR>
+nnoremap ,cg <Cmd>Telescope live_grep<CR>
+nnoremap ,ck <Cmd>Telescope keymaps<CR>
+nnoremap ,cl <Cmd>Telescope colorscheme<CR>
+nnoremap ,cb <Cmd>Telescope buffers<CR>
+nnoremap ,ch <Cmd>Telescope help_tags<CR>
+" ....................................................................... }}}1
+
+" General text editing  ................................................. {{{1
+"
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" ....................................................................... }}}1
+
+" Work with code  ....................................................... {{{1
+
+" ,cd   Change buffer directory to current file's parent
+map ,cd :lcd %:p:h<CR>
+
+" ,sr     Compile and Run with SingleCompile
+nmap ,sr  :SCCompileRun<CR>
+" ,sc     Compile with SingleCompile
+nmap ,sc  :SCCompile<CR>
+
+" ,cw ,cq   Open and close quickfix window
+nmap ,cw  :cwindow<CR>
+nmap ,cq  :cclose<CR>
+" ,lw ,lq   Open and close location window
+nmap ,lw  :lwindow<CR>
+nmap ,lq  :lclose<CR>
+" ,, ,. ,m  Jump to current, next or prev error in quickfix list
+nmap ,, :cc<CR>
+nmap ,. :cnext<CR>
+nmap ,m :cNext<CR>
+" ,< ,> ,M  Jump to current, next or prev error in location list
+nmap ,< :ll<CR>
+nmap ,> :lnext<CR>
+nmap ,M :lNext<CR>
+
+" ""  List contents of all registers (that typically contain pasteable text).
+nnoremap <silent> "" :registers "0123456789abcdefghijklmnopqrstuvwxyz*+.<CR>
+
+" Don't use Ex mode, use Q for formatting
+nmap Q gq
+" ,ff   Format code
+nmap ,ff :set ff=unix<CR>:%!fromdos<CR>gg=G:%s/\s\+$//ge<CR>
+" ,fc   Clean code
+nmap ,fc :set ff=unix<CR>:%!fromdos<CR>:%s/\s\+$//ge<CR>
+" \ftu  Convert to UTF-8
+nmap <Leader>ftu   :set fenc=utf8<CR>:w<CR>
+" \ftg  Convert to GBK
+nmap <Leader>ftg   :set fenc=gbk<CR>:w<CR>
+
+" \str  Convert double quotation string to single quotation
+nmap <Leader>str :%s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>
+vmap <Leader>str :s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>
+" \sym  String to Symbol for Ruby
+nmap <Leader>sym :%s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>
+vmap <Leader>sym :s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>
+" \hash Convert hash to Ruby 1.9's JSON-like style
+nmap <Leader>hash :%s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>
+vmap <Leader>hash :s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>
+" \url  Convert url to a relative path
+nmap <Leader>url :%s/https\?:\/\/[^/]\+\/\@=//gce<CR>
+vmap <Leader>url :s/https\?:\/\/[^/]\+\/\@=//gce<CR>
+
+" NERD Commenter mappings
+nmap ,cc        <Plug>NERDCommenterComment
+vmap ,cc        <Plug>NERDCommenterComment
+nmap ,c<Space>  <Plug>NERDCommenterToggle
+vmap ,c<Space>  <Plug>NERDCommenterToggle
+nmap ,cm        <Plug>NERDCommenterMinimal
+vmap ,cm        <Plug>NERDCommenterMinimal
+nmap ,cs        <Plug>NERDCommenterSexy
+vmap ,cs        <Plug>NERDCommenterSexy
+nmap ,cn        <Plug>NERDCommenterNest
+vmap ,cn        <Plug>NERDCommenterNest
+nmap ,cu        <Plug>NERDCommenterUncomment
+vmap ,cu        <Plug>NERDCommenterUncomment
+" ....................................................................... }}}1
+
+" Work with vim configurations  ......................................... {{{1
+"
+" ,vs   Reload vimrc
+nmap ,vs  :source $HOME/.config/nvim/init.vim<CR>
+" ,pi   Install plugins
+nmap ,pi  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerInstall<CR>:PackerCompile<CR>
+" ,pu   Update (sync) plugins
+nmap ,pu  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerSync<CR>
+" ....................................................................... }}}1
+
+" Git related keymappings  .............................................. {{{1
+"
+" vim-fugitive
+nmap ,gac :Gcommit --amend --verbose<CR>
+nmap ,gb  :Git blame<CR>
+nmap ,gc  :Git commit --verbose<CR>
+nmap ,gd  :Gvdiff<CR>
+nmap ,gi  :Gsplit! diff<CR><C-W>_
+nmap ,gk  :Gvdiff HEAD<CR><C-W>_
+nmap ,gl  :Gllog<CR>
+nmap ,ge  :Gedit<CR>
+nmap ,gg  :Ggrep<Space>
+nmap ,gr  :Gread<CR>
+nmap ,gs  :Gstatus<CR>
+nmap ,gw  :Gwrite<CR>
+nmap ,gf  :Git difftool<CR>
+nmap ,gm  :Git mergetool<CR>
+" ....................................................................... }}}1
+
+" Diff mode key mappings  ............................................... {{{1
+"
+" <C-J/K>   Move cursor between diff chunks
+nnoremap <expr> <C-J> &diff ? ']c' : '<C-W>j'
+nnoremap <expr> <C-K> &diff ? '[c' : '<C-W>k'
+" ....................................................................... }}}1
+
+" Close various informative/minor window with `q`  ...................... {{{1
+"
+" Close left window (original file) in diff mode
+nnoremap <expr> q &diff ? ':diffoff<CR><C-W>h:q<CR>' : 'q'
+" Close Vim help window
+autocmd FileType help nnoremap <buffer> q :q<CR>
+" Close vim-fugitive window
+autocmd FileType fugitive,git,gitcommit nnoremap <buffer> q :q<CR>
+" Close netrw window
+autocmd FileType netrw nnoremap <buffer> q :q<CR>
+autocmd FileType netrw nnoremap <buffer> <C-L> <C-W>l
+" Close QuickFix & Location window
+autocmd FileType qf nnoremap <buffer> q :q<CR>
+" ....................................................................... }}}1
+
+" Default mappings coming from plugins  ................................. {{{1
+"
+" \di \ds           Start/Stop DrawIt
+"
+" splitjoin.vim
+" gS      Split a one-liner into multiple lines
+" gJ      (with the cursor on the first line of a block)
+"         Join a block into a single-line statement
+
+" vim-surround
+" cs"'    Change surrounding from double quotes to single quotes
+" cs'<q>  Change surrounding from single quotes to <q> tags
+" cst"    Change surrounding from HTML tags to double quotes
+" ds"     Remove surrounding double quotes
+" ysiw]   Surround inner world with []
+" ysiw{   Surround inner world with { } and extra spaces
+" yss)    Surround entire line with ()
+" ysiw<em>
+"         Surround inner world with <em> tags
+" Visual mode: S<p class="important">
+"         Surround selected area with <p class="important">
+
+" vim-jdaddy
+" gqaj    Pretty prints the JSON construct under the cursor.
+" =       Use gqaj to pretty print JSON
+au FileType json nmap <buffer> = gggqaj
+au FileType json vmap <buffer> = <Esc>gggqaj
+
+" vim-gh-line
+" Default key mapping for a blob view: <leader>gh
+" Default key mapping for a blame view: <leader>gb
+" Default key mapping for repo view: <leader>go
+
+" taskpaper.vim
+" \td     Mark task as done
+" \tx     Mark task as cancelled
+" \tt     Mark task as today
+" \tD     Archive @done items
+" \tX     Show tasks marked as cancelled
+" \tT     Show tasks marked as today
+" \t/     Search for items including keyword
+" \ts     Search for items including tag
+" \tp     Fold all projects
+" \t.     Fold all notes
+" \tP     Focus on the current project
+" \tj     Go to next project
+" \tk     Go to previous project
+" \tg     Go to specified project
+" \tm     Move task to specified project
+"  ...................................................................... }}}1
+
+" vim: set fdm=marker fdl=1:
