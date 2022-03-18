@@ -85,6 +85,8 @@ cmap <S-Insert>		<C-R>+
 
 " Essential toggles  .................................................... {{{1
 "
+" ,ib   Toggle Indent Blankline
+map ,ib :IndentBlanklineToggle<CR>
 " ,k    Toggle iskeyword contain or not contain '_'
 map ,k  :call <SID>ToggleIsKeyword('_')<CR>
 function! s:ToggleIsKeyword(char) " ..................................... {{{2
