@@ -37,6 +37,12 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = require_config('lualine'),
   })
+  -- A snazzy bufferline for Neovim
+  use({
+    'akinsho/bufferline.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = require_config('bufferline'),
+  })
   -- A file explorer tree for neovim written in lua
   use({
     'kyazdani42/nvim-tree.lua',
