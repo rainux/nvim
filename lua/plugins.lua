@@ -93,6 +93,11 @@ return require('packer').startup(function()
 
   -- IDE like experience  ......................................................................................... {{{1
   --
+  -- The superior project management solution for neovim.
+  use({
+    'ahmedkhalf/project.nvim',
+    config = require_config('project'),
+  })
   -- Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
   use({ 'dense-analysis/ale', config = require_config('ale') })
   -- Vim plugin that displays tags in a window, ordered by scope.
