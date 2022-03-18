@@ -24,6 +24,13 @@ return require('packer').startup(function()
   --
   -- Better fold markers
   use({ 'dbmrq/vim-chalk', config = require_config('chalk') })
+  -- Easy foldtext customization for [neo]vim.
+  use({
+    'scr1pt0r/crease.vim',
+    config = function()
+      vim.g.crease_foldtext = { default = ' %t %= %l lines  ' }
+    end,
+  })
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
   use({
     'nvim-lualine/lualine.nvim',
