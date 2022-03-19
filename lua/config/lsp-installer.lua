@@ -50,15 +50,19 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'i', '<C-k>', '<cmd>LspSignatureHelp<CR>')
   buf_map(bufnr, 'n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
   if client.resolved_capabilities.document_formatting then
     vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
   end
 end
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
 -- or if the server is already installed).
 lsp_installer.on_server_ready(function(server)
-  local opts = { on_attach = on_attach }
+  local opts = { on_attach = on_attach, capabilities = capabilities }
 
   if server.name == 'sumneko_lua' then
     opts = vim.tbl_extend('force', opts, require('lsp/sumneko_lua'))

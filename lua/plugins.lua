@@ -121,6 +121,20 @@ return require('packer').startup(function()
   })
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
+  -- A completion plugin for neovim coded in Lua.
+  use({
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+    },
+    config = require_config('cmp'),
+  })
+  -- vscode-like pictograms for neovim lsp completion items
+  use('onsails/lspkind-nvim')
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
