@@ -119,6 +119,8 @@ return require('packer').startup(function()
     requires = { 'neovim/nvim-lspconfig' },
     config = require_config('lsp-installer'),
   })
+  -- LSP Progress lualine componenet
+  use('arkav/lualine-lsp-progress')
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
   -- A completion plugin for neovim coded in Lua.
