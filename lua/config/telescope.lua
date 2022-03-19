@@ -10,4 +10,14 @@ require('telescope').setup({
       },
     },
   },
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
 })
+
+-- From telescope-ui-select.nvim
+require('telescope').load_extension('ui-select')
+-- From project.nvim
+require('telescope').load_extension('projects')

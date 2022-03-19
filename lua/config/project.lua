@@ -3,5 +3,3 @@ require('project_nvim').setup({
   exclude_dirs = {},
   silent_chdir = true,
 })
-
-require('telescope').load_extension('projects')

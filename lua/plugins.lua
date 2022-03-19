@@ -65,6 +65,8 @@ return require('packer').startup(function()
     requires = { 'nvim-lua/plenary.nvim' },
     config = require_config('telescope'),
   })
+  -- Use Telescope as default UI select component
+  use({ 'nvim-telescope/telescope-ui-select.nvim' })
   -- A command-line fuzzy finder
   use({ 'junegunn/fzf.vim', requires = { 'junegunn/fzf' }, config = require_config('fzf') })
   -- .............................................................................................................. }}}1
