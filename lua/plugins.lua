@@ -23,6 +23,9 @@ return require('packer').startup(function()
 
   -- Neovim core feature extension  ............................................................................... {{{1
   --
+  -- WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started
+  -- typing.
+  use({ 'folke/which-key.nvim', config = require_config('which-key') })
   -- Better fold markers
   use({ 'dbmrq/vim-chalk', config = require_config('chalk') })
   -- Easy foldtext customization for [neo]vim.
@@ -199,4 +202,4 @@ return require('packer').startup(function()
   end
 end)
 
--- vim: fdm=marker fdl=1 tw=120:
+-- vim: set fdm=marker fdl=1 tw=120:

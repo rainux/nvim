@@ -1,4 +1,4 @@
--- Helper function  {{{1
+-- Helper functions  .............................................................................................. {{{1
 vim.cmd([[
 function! GetCharCode()
   " Get the output of :ascii
@@ -31,7 +31,7 @@ function! GetCharCode()
   return "'". char ."' ". nr
 endfunction
 ]])
--- }}}1
+-- ................................................................................................................ }}}1
 
 local colors = {
   yellow = '#ECBE7B',
@@ -105,4 +105,4 @@ ins_left({
 
 require('lualine').setup(config)
 
--- vim: fdm=marker fdl=0 tw=120:
+-- vim: set fdm=marker fdl=0 tw=120:

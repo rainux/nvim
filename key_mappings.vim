@@ -85,8 +85,6 @@ cmap <S-Insert>		<C-R>+
 
 " Essential toggles  .................................................... {{{1
 "
-" ,ib   Toggle Indent Blankline
-map ,ib :IndentBlanklineToggle<CR>
 " ,k    Toggle iskeyword contain or not contain '_'
 map ,k  :call <SID>ToggleIsKeyword('_')<CR>
 function! s:ToggleIsKeyword(char) " ..................................... {{{2
@@ -98,52 +96,12 @@ function! s:ToggleIsKeyword(char) " ..................................... {{{2
     echo '&iskeyword now not contain "' . a:char . '"'
   endif
 endfunction " ........................................................... }}}2
-" ,tc   Toggle columns
-map ,tc :call <SID>ToggleColumns()<CR>
-function! s:ToggleColumns() " ........................................... {{{2
-  if &number
-    set colorcolumn=0
-    set nonumber
-    set signcolumn=no
-    echo 'Collumns disabled'
-  else
-    set colorcolumn=+1
-    set number
-    set signcolumn=yes
-    echo 'Collumns enabled'
-  endif
-endfunction " ........................................................... }}}2
-" ,hs   Toggle hlsearch
-map ,hs :set hlsearch!<CR>
-" ,sp   Toggle spell check
-map ,sp :set spell!<CR>
-" ,nt   Toggle NvimTree
-map ,nt :NvimTreeToggle<CR>
-" ,nf   NvimTreeFindFile
-map ,nf :NvimTreeFindFile<CR>
-" ,nr   Netrw Explorer
-map ,nr :Explore<CR>
-" ,ve   Netrw Vertial Explorer
-map ,ve :Vexplore<CR>
-" ,tl   Toggle Tagbar
-map ,tl :TagbarToggle<CR>
-" ,al   Toggle ALE linting
-map ,al :ALEToggle<CR>
 " ....................................................................... }}}1
 
 " Search & Replace  ..................................................... {{{1
 "
 " ,*    Substitute(Replace)
 nmap ,* :%s/<C-R><C-W>/
-" ,rg   Search in files via rg
-nmap ,rg :execute 'Rg ' . input("Rg search for pattern: ", "<C-R><C-W>")<CR>
-" Search and grep using Telescope
-nnoremap ,cf <Cmd>Telescope find_files<CR>
-nnoremap ,cg <Cmd>Telescope live_grep<CR>
-nnoremap ,ck <Cmd>Telescope keymaps<CR>
-nnoremap ,cl <Cmd>Telescope colorscheme<CR>
-nnoremap ,cb <Cmd>Telescope buffers<CR>
-nnoremap ,ch <Cmd>Telescope help_tags<CR>
 " ....................................................................... }}}1
 
 " General text editing  ................................................. {{{1
@@ -205,20 +163,6 @@ vmap <Leader>hash :s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>
 " \url  Convert url to a relative path
 nmap <Leader>url :%s/https\?:\/\/[^/]\+\/\@=//gce<CR>
 vmap <Leader>url :s/https\?:\/\/[^/]\+\/\@=//gce<CR>
-
-" NERD Commenter mappings
-nmap ,cc        <Plug>NERDCommenterComment
-vmap ,cc        <Plug>NERDCommenterComment
-nmap ,c<Space>  <Plug>NERDCommenterToggle
-vmap ,c<Space>  <Plug>NERDCommenterToggle
-nmap ,cm        <Plug>NERDCommenterMinimal
-vmap ,cm        <Plug>NERDCommenterMinimal
-nmap ,cs        <Plug>NERDCommenterSexy
-vmap ,cs        <Plug>NERDCommenterSexy
-nmap ,cn        <Plug>NERDCommenterNest
-vmap ,cn        <Plug>NERDCommenterNest
-nmap ,cu        <Plug>NERDCommenterUncomment
-vmap ,cu        <Plug>NERDCommenterUncomment
 " ....................................................................... }}}1
 
 " Work with vim configurations  ......................................... {{{1

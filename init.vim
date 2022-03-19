@@ -1,4 +1,5 @@
 lua require('plugins')
+lua require('mappings')
 
 color base16-gruvbox-dark-hard
 
