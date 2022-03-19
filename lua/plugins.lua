@@ -119,6 +119,8 @@ return require('packer').startup(function()
     requires = { 'neovim/nvim-lspconfig' },
     config = require_config('lsp-installer'),
   })
+  -- Tools for better development in rust using neovim's builtin lsp
+  use('simrat39/rust-tools.nvim')
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
