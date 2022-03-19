@@ -1,5 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
   local command = { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
   packer_bootstrap = fn.system(command)
@@ -12,7 +13,7 @@ vim.cmd([[
   augroup end
 ]])
 
-function require_config(name)
+local function require_config(name)
   return string.format('require("config/%s")', name)
 end
 
@@ -110,6 +111,12 @@ return require('packer').startup(function()
 
   -- LSP support  ................................................................................................. {{{1
   --
+  -- Neovim plugin that allows you to seamlessly manage LSP servers with :LspInstall.
+  use({
+    'williamboman/nvim-lsp-installer',
+    requires = { 'neovim/nvim-lspconfig' },
+    config = require_config('lsp-installer'),
+  })
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
@@ -172,4 +179,4 @@ return require('packer').startup(function()
   end
 end)
 
--- vim: fdm=marker fdl=0 tw=120:
+-- vim: fdm=marker fdl=1 tw=120:
