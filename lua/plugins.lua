@@ -26,6 +26,13 @@ return require('packer').startup(function()
   -- WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started
   -- typing.
   use({ 'folke/which-key.nvim', config = require_config('which-key') })
+  -- Fix CursorHold Performance.
+  use({
+    'antoinemadec/FixCursorHold.nvim',
+    config = function()
+      vim.g.cursorhold_updatetime = 100
+    end,
+  })
   -- Better fold markers
   use({ 'dbmrq/vim-chalk', config = require_config('chalk') })
   -- Easy foldtext customization for [neo]vim.
@@ -124,6 +131,10 @@ return require('packer').startup(function()
   })
   -- LSP Progress lualine componenet
   use('arkav/lualine-lsp-progress')
+  -- Pop-up menu for code actions to show meta-information and diff preview
+  use({ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' })
+  -- VSCode 💡 for neovim's built-in LSP.
+  use({ 'kosayoda/nvim-lightbulb', config = require_config('lightbulb') })
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
   -- A completion plugin for neovim coded in Lua.
