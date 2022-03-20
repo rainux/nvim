@@ -135,6 +135,7 @@ return require('packer').startup(function()
 
       'hrsh7th/cmp-vsnip',
       'hrsh7th/vim-vsnip',
+      'rafamadriz/friendly-snippets',
     },
     config = require_config('cmp'),
   })
@@ -149,7 +150,7 @@ return require('packer').startup(function()
   -- General programming support  ................................................................................. {{{1
   --
   -- GitHub Copilot
-  use('github/copilot.vim')
+  use({ 'github/copilot.vim', config = require_config('copilot') })
   -- Even better % navigate and highlight matching words, modern matchit and matchparen
   use({ 'andymass/vim-matchup', event = 'VimEnter' })
   -- Closes brackets. Perfect companion to vim-endwise. Basically, a more conservative version of auto-pairs that only

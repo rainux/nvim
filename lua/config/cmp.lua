@@ -1,6 +1,10 @@
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
@@ -17,10 +21,7 @@ cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
   mapping = {
@@ -35,13 +36,29 @@ cmp.setup({
     }),
     -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
+
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if vim.fn['vsnip#jumpable'](1) == 1 then
+        feedkey('<Plug>(vsnip-jump-next)', '')
+      else
+        local copilot_keys = vim.fn['copilot#Accept']()
+        if copilot_keys ~= '' then
+          vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+        else
+          fallback()
+        end
+      end
+    end, { 'i', 's' }),
+
+    ['<S-Tab>'] = cmp.mapping(function()
+      if vim.fn['vsnip#jumpable'](-1) == 1 then
+        feedkey('<Plug>(vsnip-jump-prev)', '')
+      end
+    end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
+    { name = 'vsnip', priority = 999 },
   }, {
     { name = 'buffer' },
   }),
