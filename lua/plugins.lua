@@ -118,7 +118,7 @@ return require('packer').startup(function()
     config = require_config('project'),
   })
   -- Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
-  use({ 'dense-analysis/ale', config = require_config('ale') })
+  use({ 'dense-analysis/ale', ft = { 'lua' }, config = require_config('ale') })
   -- Vim plugin that displays tags in a window, ordered by scope.
   use('preservim/tagbar')
   -- Asynchronous build and test dispatcher
@@ -203,6 +203,13 @@ return require('packer').startup(function()
     config = function()
       vim.g.NERDDefaultNesting = 1
       vim.g.NERDSpaceDelims = 1
+    end,
+  })
+  -- Smart and Powerful commenting plugin for neovim
+  use({
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
     end,
   })
   -- A Vim plugin making it more convenient to compile or run a single source file.

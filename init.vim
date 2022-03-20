@@ -26,6 +26,12 @@ set virtualedit=block
 set visualbell
 set wildmode=list:longest,full
 
+" TODO: Setup tab behavior based on file types
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
 autocmd CursorHold * lua vim.diagnostic.open_float()
 
 source ~/.config/nvim/key_mappings.vim
