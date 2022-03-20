@@ -135,6 +135,15 @@ return require('packer').startup(function()
   use({ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' })
   -- VSCode 💡 for neovim's built-in LSP.
   use({ 'kosayoda/nvim-lightbulb', config = require_config('lightbulb') })
+  -- VS Code-like renaming UI for Neovim, writen in Lua.
+  use({
+    'abzcoding/renamer.nvim',
+    branch = 'develop',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('renamer').setup()
+    end,
+  })
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
   -- A completion plugin for neovim coded in Lua.
