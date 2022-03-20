@@ -58,8 +58,8 @@ endfor
 
 " ⌘-[1-9]   Switch to specified tab
 for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	exec printf('map <D-%d> %dgt', i, i)
-	exec printf('imap <D-%d> <Esc>%dgta', i, i)
+	exec printf('map <D-%d> <cmd>BufferLineGoToBuffer %d<CR>', i, i)
+	exec printf('imap <D-%d> <cmd>BufferLineGoToBuffer %d<CR>', i, i)
 endfor
 map <D-0> :tablast<CR>
 imap <D-0> <Esc>:tablast<CR>a
