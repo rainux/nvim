@@ -23,64 +23,36 @@ return require('packer').startup(function()
 
   -- Neovim core feature extension  ............................................................................... {{{1
   --
+  -- plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice.
+  use({ 'nvim-lua/plenary.nvim' })
+  -- A lua fork of vim-devicons. This plugin provides the same icons as well as colors for each icon.
+  use({ 'kyazdani42/nvim-web-devicons' })
   -- WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started
   -- typing.
   use({ 'folke/which-key.nvim', config = require_config('which-key') })
   -- Fix CursorHold Performance.
-  use({
-    'antoinemadec/FixCursorHold.nvim',
-    config = function()
-      vim.g.cursorhold_updatetime = 100
-    end,
-  })
+  use({ 'antoinemadec/FixCursorHold.nvim', config = require_config('fix-cursor-hold') })
   -- Better fold markers
   use({ 'dbmrq/vim-chalk', config = require_config('chalk') })
   -- Easy foldtext customization for [neo]vim.
-  use({
-    'scr1pt0r/crease.vim',
-    config = function()
-      vim.g.crease_foldtext = { default = ' %t %= %l lines  ' }
-    end,
-  })
+  use({ 'scr1pt0r/crease.vim', config = require_config('crease') })
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
-  use({
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = require_config('lualine'),
-  })
+  use({ 'nvim-lualine/lualine.nvim', config = require_config('lualine') })
   -- A snazzy bufferline for Neovim
-  use({
-    'akinsho/bufferline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = require_config('bufferline'),
-  })
+  use({ 'akinsho/bufferline.nvim', config = require_config('bufferline') })
   -- A file explorer tree for neovim written in lua
-  use({
-    'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = require_config('nvim-tree'),
-    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
-  })
+  use({ 'kyazdani42/nvim-tree.lua', config = require_config('nvim-tree'), cmd = { 'NvimTreeToggle' } })
   -- Intelligently reopen files at your last edit position in Vim.
   use('farmergreg/vim-lastplace')
   -- Color schemes
   use('rainux/base16-vim')
-  use({
-    'lunarvim/onedarker.nvim',
-    config = function()
-      require('onedarker').setup()
-    end,
-  })
+  use({ 'lunarvim/onedarker.nvim', config = require_config('onedarker') })
   -- .............................................................................................................. }}}1
 
   -- Searchers  ................................................................................................... {{{1
   --
   -- Find, Filter, Preview, Pick. All lua, all the time.
-  use({
-    'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = require_config('telescope'),
-  })
+  use({ 'nvim-telescope/telescope.nvim', config = require_config('telescope') })
   -- Use Telescope as default UI select component
   use({ 'nvim-telescope/telescope-ui-select.nvim' })
   -- A command-line fuzzy finder
@@ -100,11 +72,7 @@ return require('packer').startup(function()
   -- A Git wrapper so awesome, it should be illegal.
   use('tpope/vim-fugitive')
   -- Git integration for buffers
-  use({
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = require_config('gitsigns'),
-  })
+  use({ 'lewis6991/gitsigns.nvim', config = require_config('gitsigns') })
   -- A Vim plugin that opens a link to the current line on GitHub (and also supports Bitbucket, self-deployed GitHub,
   -- Googlesource and GitLab).
   use('ruanyl/vim-gh-line')
@@ -113,10 +81,7 @@ return require('packer').startup(function()
   -- IDE like experience  ......................................................................................... {{{1
   --
   -- The superior project management solution for neovim.
-  use({
-    'ahmedkhalf/project.nvim',
-    config = require_config('project'),
-  })
+  use({ 'ahmedkhalf/project.nvim', config = require_config('project') })
   -- Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
   use({ 'dense-analysis/ale', ft = { 'lua' }, config = require_config('ale') })
   -- Vim plugin that displays tags in a window, ordered by scope.
@@ -142,14 +107,7 @@ return require('packer').startup(function()
   -- VSCode 💡 for neovim's built-in LSP.
   use({ 'kosayoda/nvim-lightbulb', config = require_config('lightbulb') })
   -- VS Code-like renaming UI for Neovim, writen in Lua.
-  use({
-    'abzcoding/renamer.nvim',
-    branch = 'develop',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('renamer').setup()
-    end,
-  })
+  use({ 'abzcoding/renamer.nvim', branch = 'develop', config = require_config('renamer') })
   -- A completion plugin for neovim coded in Lua.
   use({
     'hrsh7th/nvim-cmp',
@@ -188,31 +146,11 @@ return require('packer').startup(function()
   -- Wisely add "end" in Ruby, Vimscript, Lua, etc. Tree-sitter aware alternative to tpope's vim-endwise
   use({ 'RRethy/nvim-treesitter-endwise', config = require_config('endwise') })
   -- Indent guides for Neovim
-  use({
-    'lukas-reineke/indent-blankline.nvim',
-    config = function()
-      require('indent_blankline').setup({
-        show_current_context = true,
-        show_current_context_start = true,
-      })
-    end,
-    cmd = { 'IndentBlanklineToggle' },
-  })
+  use({ 'lukas-reineke/indent-blankline.nvim', config = require_config('indent-blankline') })
   -- Vim plugin for intensely nerdy commenting powers
-  use({
-    'preservim/nerdcommenter',
-    config = function()
-      vim.g.NERDDefaultNesting = 1
-      vim.g.NERDSpaceDelims = 1
-    end,
-  })
+  use({ 'preservim/nerdcommenter', config = require_config('nerdcommenter') })
   -- Smart and Powerful commenting plugin for neovim
-  use({
-    'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end,
-  })
+  use({ 'numToStr/Comment.nvim', config = require_config('comment') })
   -- A Vim plugin making it more convenient to compile or run a single source file.
   use({ 'xuhdev/SingleCompile', cmd = { 'SCCompile', 'SCCompileRun' } })
   -- Switch between single-line and multiline forms of code
