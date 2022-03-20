@@ -181,11 +181,12 @@ return require('packer').startup(function()
   use({ 'github/copilot.vim', config = require_config('copilot') })
   -- Even better % navigate and highlight matching words, modern matchit and matchparen
   use({ 'andymass/vim-matchup', event = 'VimEnter' })
-  -- Closes brackets. Perfect companion to vim-endwise. Basically, a more conservative version of auto-pairs that only
-  -- works when you press Enter.
-  use('rstacruz/vim-closer')
-  -- Wisely add "end" in ruby, endfunction/endif/more in vim script, etc
-  use('tpope/vim-endwise')
+  -- A super powerful autopair plugin for Neovim that supports multiple characters.
+  use({ 'windwp/nvim-autopairs', config = require_config('autopairs') })
+  -- Use treesitter to autoclose and autorename html tag
+  use({ 'windwp/nvim-ts-autotag', config = require_config('ts-autotag') })
+  -- Wisely add "end" in Ruby, Vimscript, Lua, etc. Tree-sitter aware alternative to tpope's vim-endwise
+  use({ 'RRethy/nvim-treesitter-endwise', config = require_config('endwise') })
   -- Indent guides for Neovim
   use({
     'lukas-reineke/indent-blankline.nvim',
