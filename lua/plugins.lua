@@ -150,8 +150,6 @@ return require('packer').startup(function()
       require('renamer').setup()
     end,
   })
-  -- Tools for better development in rust using neovim's builtin lsp
-  use('simrat39/rust-tools.nvim')
   -- A completion plugin for neovim coded in Lua.
   use({
     'hrsh7th/nvim-cmp',
@@ -169,6 +167,12 @@ return require('packer').startup(function()
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
   use('simrat39/symbols-outline.nvim')
+  -- .............................................................................................................. }}}1
+
+  -- Programming Language Support  ................................................................................ {{{1
+  --
+  -- Tools for better development in rust using neovim's builtin lsp
+  use('simrat39/rust-tools.nvim')
   -- .............................................................................................................. }}}1
 
   -- General programming support  ................................................................................. {{{1
@@ -211,6 +215,8 @@ return require('packer').startup(function()
   --
   -- Comprehensive taskpaper support for vim (based on davidoc/taskpaper.vim and related repos)
   use('cweagans/vim-taskpaper')
+  -- Easily interact with tmux from vim
+  use({ 'preservim/vimux', requires = { 'jtdowney/vimux-cargo' }, config = require_config('vimux') })
   -- .............................................................................................................. }}}1
 
   -- Toys  ........................................................................................................ {{{1

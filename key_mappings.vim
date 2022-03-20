@@ -165,6 +165,20 @@ nmap <Leader>url :%s/https\?:\/\/[^/]\+\/\@=//gce<CR>
 vmap <Leader>url :s/https\?:\/\/[^/]\+\/\@=//gce<CR>
 " ....................................................................... }}}1
 
+" Rust development  ..................................................... {{{1
+"
+" TODO: Create mappings based on project type instead of file type for better
+" experience. Maybe take advantage of LSP status.
+au FileType rust map ,ru :VimuxInterruptRunner<CR>:CargoRun<CR>
+au FileType rust map ,rl :VimuxInterruptRunner<CR>:VimuxRunLastCommand<CR>
+au FileType rust map ,ri :VimuxInterruptRunner<CR>
+au FileType rust map ,rk :VimuxRunCommand 'cargo bench'<CR>
+au FileType rust map ,rp :VimuxRunCommand 'cargo run -- '<C-B>
+au FileType rust map ,rt :CargoTestAll<CR>
+au FileType rust map ,rb :CargoUnitTestCurrentFile<CR>
+au FileType rust map ,rf :CargoUnitTestFocused<CR>
+" ....................................................................... }}}1
+
 " Work with vim configurations  ......................................... {{{1
 "
 " ,vs   Reload vimrc

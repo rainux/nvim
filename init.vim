@@ -26,4 +26,6 @@ set virtualedit=block
 set visualbell
 set wildmode=list:longest,full
 
+autocmd CursorHold * lua vim.diagnostic.open_float()
+
 source ~/.config/nvim/key_mappings.vim

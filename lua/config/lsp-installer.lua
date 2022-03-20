@@ -50,6 +50,8 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'i', '<C-k>', '<cmd>LspSignatureHelp<CR>')
   buf_map(bufnr, 'n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
+  buf_map(bufnr, 'n', ',rr', '<cmd>RustRunnable<CR>')
+
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   if client.resolved_capabilities.document_formatting then
@@ -69,6 +71,7 @@ lsp_installer.on_server_ready(function(server)
   end
 
   if server.name == 'rust_analyzer' then
+    opts = vim.tbl_extend('force', opts, require('lsp/rust_analyzer'))
     -- Initialize the LSP via rust-tools instead
     require('rust-tools').setup({
       -- The "server" property provided in rust-tools setup function are the
