@@ -65,6 +65,12 @@ return require('packer').startup(function()
   use('farmergreg/vim-lastplace')
   -- Color schemes
   use('rainux/base16-vim')
+  use({
+    'lunarvim/onedarker.nvim',
+    config = function()
+      require('onedarker').setup()
+    end,
+  })
   -- .............................................................................................................. }}}1
 
   -- Searchers  ................................................................................................... {{{1
@@ -159,8 +165,6 @@ return require('packer').startup(function()
     },
     config = require_config('cmp'),
   })
-  -- vscode-like pictograms for neovim lsp completion items
-  use('onsails/lspkind-nvim')
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.

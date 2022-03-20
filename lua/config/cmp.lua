@@ -1,23 +1,13 @@
 local cmp = require('cmp')
-local lspkind = require('lspkind')
 
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+require('lvim.core.cmp').config()
 cmp.setup({
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol_text',
-      menu = {
-        buffer = '[Buffer]',
-        nvim_lsp = '[LSP]',
-        luasnip = '[LuaSnip]',
-        nvim_lua = '[Lua]',
-        latex_symbols = '[Latex]',
-      },
-    }),
-  },
+  formatting = lvim.builtin.cmp.formatting,
+  documentation = lvim.builtin.cmp.documentation,
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)

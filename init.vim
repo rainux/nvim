@@ -1,9 +1,11 @@
 lua require('plugins')
 lua require('mappings')
+lua lvim = { builtin = {} }
 
 color base16-gruvbox-dark-hard
 
 set cmdheight=2
+set cursorline
 set colorcolumn=+1
 set diffopt=internal,filler,closeoff,iwhite
 set fileformats=unix,dos

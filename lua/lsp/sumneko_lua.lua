@@ -3,7 +3,7 @@ local M = {}
 M.settings = {
   Lua = {
     diagnostics = {
-      globals = { 'vim', 'use' },
+      globals = { 'vim', 'lvim', 'use' },
     },
   },
 }
