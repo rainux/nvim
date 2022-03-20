@@ -131,6 +131,8 @@ return require('packer').startup(function()
   --
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
+  -- JSON manipulation and pretty printing
+  use('tpope/vim-jdaddy')
   -- .............................................................................................................. }}}1
 
   -- General programming support  ................................................................................. {{{1
