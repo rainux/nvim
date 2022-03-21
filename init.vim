@@ -9,6 +9,8 @@ set cursorline
 set colorcolumn=+1
 set diffopt=internal,filler,closeoff,iwhite
 set fileformats=unix,dos
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set guifont=FiraCode\ Nerd\ Font:h21
 set ignorecase smartcase
 set list
