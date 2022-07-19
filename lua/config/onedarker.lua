@@ -1,1 +1,1 @@
-require('onedarker').setup()
+require('onedarker')
