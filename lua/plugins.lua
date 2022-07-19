@@ -46,7 +46,8 @@ return require('packer').startup(function()
   use('farmergreg/vim-lastplace')
   -- Color schemes
   use('rainux/base16-vim')
-  use({ 'lunarvim/onedarker.nvim', config = require_config('onedarker') })
+  use({ 'LunarVim/onedarker.nvim', config = require_config('onedarker') })
+  use({ 'LunarVim/Colorschemes' })
   -- .............................................................................................................. }}}1
 
   -- Searchers  ................................................................................................... {{{1
