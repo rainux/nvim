@@ -132,6 +132,9 @@ return require('packer').startup(function()
   --
   -- Tools for better development in rust using neovim's builtin lsp
   use('simrat39/rust-tools.nvim')
+  -- Modern Go plugin for Neovim, based on gopls, treesitter AST, Dap and a variety of go tools.
+  use({ 'ray-x/go.nvim', config = require_config('go') })
+  use('ray-x/guihua.lua') -- recommanded if need floating window support
   -- JSON manipulation and pretty printing
   use('tpope/vim-jdaddy')
   -- .............................................................................................................. }}}1

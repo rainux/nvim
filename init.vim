@@ -11,7 +11,7 @@ set diffopt=internal,filler,closeoff,iwhite
 set fileformats=unix,dos
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-set guifont=FiraCode\ Nerd\ Font:h21
+set guifont=FiraCode\ Nerd\ Font:h19
 set ignorecase smartcase
 set list
 set noshowmode
@@ -35,5 +35,8 @@ set softtabstop=2
 set tabstop=2
 
 autocmd CursorHold * lua vim.diagnostic.open_float()
+autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
+autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
+autocmd BufEnter *.go :set noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 source ~/.config/nvim/key_mappings.vim
