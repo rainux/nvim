@@ -37,6 +37,7 @@ wk.register({
   },
   l = {
     i = { '<cmd>LspInfo<CR>', 'LSP Info' },
+    r = { '<cmd>LspRestart<CR>', 'LSP Restart' },
     I = { '<cmd>LspInstallInfo<CR>', 'LSP Installer Info' },
   },
   n = {
