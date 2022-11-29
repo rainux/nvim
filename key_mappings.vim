@@ -177,6 +177,10 @@ au FileType rust map ,rp :VimuxRunCommand 'cargo run -- '<C-B>
 au FileType rust map ,rt :CargoTestAll<CR>
 au FileType rust map ,rb :CargoUnitTestCurrentFile<CR>
 au FileType rust map ,rf :CargoUnitTestFocused<CR>
+
+" Smart semicolon insertion
+au FileType rust inoremap ;<CR> <End>;<CR>
+au FileType rust inoremap ;;<CR> <Down><End>;<CR>
 " ....................................................................... }}}1
 
 " Work with vim configurations  ......................................... {{{1
