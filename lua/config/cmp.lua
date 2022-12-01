@@ -6,8 +6,8 @@ end
 
 require('lvim.core.cmp').config()
 cmp.setup({
-  formatting = lvim.builtin.cmp.formatting,
-  documentation = lvim.builtin.cmp.documentation,
+  -- formatting = lvim.builtin.cmp.formatting,
+  -- documentation = lvim.builtin.cmp.documentation,
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
