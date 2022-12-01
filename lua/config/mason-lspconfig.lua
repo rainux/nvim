@@ -1,20 +1,13 @@
-local lsp_installer = require('nvim-lsp-installer')
-
--- Include the servers you want to have installed by default below
-local servers = {
-  'gopls',
-  'sumneko_lua',
-  'vimls',
-  'yamlls',
-}
-
-for _, name in pairs(servers) do
-  local server_is_found, server = lsp_installer.get_server(name)
-  if server_is_found and not server:is_installed() then
-    print('Installing ' .. name)
-    server:install()
-  end
-end
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'gopls',
+    'rust_analyzer',
+    'sumneko_lua',
+    'vimls',
+    'yamlls',
+  }
+})
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
@@ -55,39 +48,46 @@ local on_attach = function(client, bufnr)
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = vim.api.nvim_create_augroup('Format', { clear = true }),
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.formatting_seq_sync() end
+    })
   end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local options = { on_attach = on_attach, capabilities = capabilities }
 
--- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
--- or if the server is already installed).
-lsp_installer.on_server_ready(function(server)
-  local opts = { on_attach = on_attach, capabilities = capabilities }
+require('mason-lspconfig').setup_handlers {
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server_name) -- default handler (optional)
+    require('lspconfig')[server_name].setup(options)
+  end,
 
-  if server.name == 'sumneko_lua' then
-    opts = vim.tbl_extend('force', opts, require('lsp/sumneko_lua'))
-  end
+  ['sumneko_lua'] = function()
+    options = vim.tbl_extend('force', options, require('lsp/sumneko_lua'))
 
-  if server.name == 'rust_analyzer' then
-    opts = vim.tbl_extend('force', opts, require('lsp/rust_analyzer'))
+    require('lspconfig').sumneko_lua.setup(options)
+  end,
+
+  ['rust_analyzer'] = function()
+    -- TODO: Broken after migrate to mason
+    options = vim.tbl_extend('force', options, require('lsp/rust_analyzer'))
+    local server = require('lspconfig').rust_analyzer
     -- Initialize the LSP via rust-tools instead
     require('rust-tools').setup({
       -- The "server" property provided in rust-tools setup function are the
       -- settings rust-tools will provide to lspconfig during init.
       -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
       -- with the user's own settings (opts).
-      server = vim.tbl_deep_extend('force', server:get_default_options(), opts),
+      -- server = vim.tbl_deep_extend('force', server:get_default_options(), options),
     })
-    server:attach_buffers()
+    -- server:attach_buffers()
     -- Only if standalone support is needed
-    require('rust-tools').start_standalone_if_required()
-  else
-    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
-    -- before passing it onwards to lspconfig.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(opts)
+    -- require('rust-tools').start_standalone_if_required()
   end
-end)
+}

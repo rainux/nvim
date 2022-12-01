@@ -95,11 +95,17 @@ return require('packer').startup(function()
 
   -- LSP support  ................................................................................................. {{{1
   --
-  -- Neovim plugin that allows you to seamlessly manage LSP servers with :LspInstall.
+  -- Portable package manager for Neovim that runs everywhere Neovim runs.
+  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
   use({
-    'williamboman/nvim-lsp-installer',
-    requires = { 'neovim/nvim-lspconfig' },
-    config = require_config('lsp-installer'),
+    'williamboman/mason.nvim',
+    requires = {
+      'neovim/nvim-lspconfig'
+    },
+  })
+  use({
+    'williamboman/mason-lspconfig.nvim',
+    config = require_config('mason-lspconfig'),
   })
   -- LSP Progress lualine componenet
   use('arkav/lualine-lsp-progress')
