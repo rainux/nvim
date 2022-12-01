@@ -10,6 +10,7 @@ set colorcolumn=+1
 set diffopt=internal,filler,closeoff,iwhite
 set fileformats=unix,dos
 set foldmethod=expr
+set foldlevelstart=99
 set foldexpr=nvim_treesitter#foldexpr()
 set guifont=FiraCode\ Nerd\ Font:h19
 set ignorecase smartcase
