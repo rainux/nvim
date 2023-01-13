@@ -1,9 +1,15 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
+    'denols',
+    'diagnosticls',
     'gopls',
+    'grammarly',
+    'graphql',
     'rust_analyzer',
     'sumneko_lua',
+    'tailwindcss',
+    'tsserver',
     'vimls',
     'yamlls',
   }
