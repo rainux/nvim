@@ -6,13 +6,14 @@ require('mason-lspconfig').setup({
     'gopls',
     'grammarly',
     'graphql',
+    'pylsp',
     'rust_analyzer',
     'sumneko_lua',
     'tailwindcss',
     'tsserver',
     'vimls',
     'yamlls',
-  }
+  },
 })
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -58,7 +59,9 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = vim.api.nvim_create_augroup('Format', { clear = true }),
       buffer = bufnr,
-      callback = function() vim.lsp.buf.formatting_seq_sync() end
+      callback = function()
+        vim.lsp.buf.formatting_seq_sync()
+      end,
     })
   end
 end
@@ -66,7 +69,7 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local options = { on_attach = on_attach, capabilities = capabilities }
 
-require('mason-lspconfig').setup_handlers {
+require('mason-lspconfig').setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
@@ -76,7 +79,6 @@ require('mason-lspconfig').setup_handlers {
 
   ['sumneko_lua'] = function()
     options = vim.tbl_extend('force', options, require('lsp/sumneko_lua'))
-
     require('lspconfig').sumneko_lua.setup(options)
   end,
 
@@ -95,5 +97,12 @@ require('mason-lspconfig').setup_handlers {
     -- server:attach_buffers()
     -- Only if standalone support is needed
     -- require('rust-tools').start_standalone_if_required()
-  end
-}
+  end,
+
+  -- Run the following command in a .py file to install plugins:
+  --    :PylspInstall pyls-isort python-lsp-black
+  ['pylsp'] = function()
+    options = vim.tbl_extend('force', options, require('lsp/pylsp'))
+    require('lspconfig').pylsp.setup(options)
+  end,
+})
