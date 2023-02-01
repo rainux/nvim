@@ -1,5 +1,4 @@
 vim.g.ale_fixers = {
-  lua = { 'stylua' },
   ruby = { 'rubocop' },
 }
 vim.g.ale_fix_on_save = 1

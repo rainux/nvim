@@ -84,7 +84,7 @@ return require('packer').startup(function()
   -- The superior project management solution for neovim.
   use({ 'ahmedkhalf/project.nvim', config = require_config('project') })
   -- Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
-  use({ 'dense-analysis/ale', ft = { 'lua' }, config = require_config('ale') })
+  use({ 'dense-analysis/ale', ft = { 'ruby' }, config = require_config('ale') })
   -- Vim plugin that displays tags in a window, ordered by scope.
   use('preservim/tagbar')
   -- Asynchronous build and test dispatcher
@@ -100,13 +100,15 @@ return require('packer').startup(function()
   use({
     'williamboman/mason.nvim',
     requires = {
-      'neovim/nvim-lspconfig'
+      'neovim/nvim-lspconfig',
     },
   })
   use({
     'williamboman/mason-lspconfig.nvim',
     config = require_config('mason-lspconfig'),
   })
+  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+  use({ 'jose-elias-alvarez/null-ls.nvim', config = require_config('null-ls') })
   -- LSP Progress lualine componenet
   use('arkav/lualine-lsp-progress')
   -- Pop-up menu for code actions to show meta-information and diff preview
