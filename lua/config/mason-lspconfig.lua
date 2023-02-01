@@ -46,6 +46,7 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'n', ']d', '<cmd>LspDiagNext<CR>')
   buf_map(bufnr, 'n', 'ga', '<cmd>LspCodeAction<CR>')
   buf_map(bufnr, 'n', ',ca', '<cmd>CodeActionMenu<CR>')
+  buf_map(bufnr, 'n', ',oi', '<cmd>OrganizeImports<CR>')
   buf_map(bufnr, 'n', '<Leader>a', '<cmd>LspDiagLine<CR>')
   buf_map(bufnr, 'i', '<C-k>', '<cmd>LspSignatureHelp<CR>')
   buf_map(bufnr, 'n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
@@ -64,6 +65,26 @@ require('mason-lspconfig').setup_handlers({
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
     require('lspconfig')[server_name].setup(options)
+  end,
+
+  ['tsserver'] = function()
+    local function organize_imports()
+      local params = {
+        command = '_typescript.organizeImports',
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = '',
+      }
+      vim.lsp.buf.execute_command(params)
+    end
+
+    require('lspconfig').tsserver.setup(vim.tbl_extend('force', options, {
+      commands = {
+        OrganizeImports = {
+          organize_imports,
+          description = 'Organize Imports',
+        },
+      },
+    }))
   end,
 
   ['sumneko_lua'] = function()
