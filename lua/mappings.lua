@@ -14,6 +14,7 @@ local function toggle_columns()
     print('Collumns enabled')
   end
 end
+
 -- ................................................................................................................ }}}1
 
 wk.register({
@@ -43,6 +44,9 @@ wk.register({
   n = {
     t = { '<cmd>NvimTreeToggle<CR>', 'Toggle Nvim Tree' },
     f = { '<cmd>NvimTreeFindFile<CR>', 'Nvim Tree Find File' },
+  },
+  q = {
+    t = { '<cmd>tabclose<CR>', 'Close Tab' },
   },
   r = {
     g = { '<cmd>execute "Rg " . input("Rg search for pattern: ", "<C-R><C-W>")<CR>', 'Rg Search' },
