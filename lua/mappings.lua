@@ -60,6 +60,7 @@ wk.register({
     l = { '<cmd>TagbarToggle<CR>', 'Tagbar' },
     o = { '<cmd>SymbolsOutline<CR>', 'Symbol Outline' },
     s = { '<cmd>set spell!<CR>', 'Spell Check' },
+    w = { '<cmd>set wrap!<CR>', 'Wrap' },
   },
 }, { mode = 'n', prefix = ',' })
 
