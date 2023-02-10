@@ -3,7 +3,7 @@ let g:chalk_char = "."
 let g:chalk_edit = 0
 
 " Files for which to add a space between the marker and the current text
-au BufRead,BufNewFile *.vim,*.lua let b:chalk_space_before = 1
+au BufRead,BufNewFile *.vim,*.lua,*.ts let b:chalk_space_before = 1
 
 vmap zf <Plug>Chalk          " Create fold at visual selection
 nmap zf <Plug>Chalk          " Create fold at operator movement
