@@ -48,7 +48,9 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'n', ',ca', '<cmd>CodeActionMenu<CR>')
   buf_map(bufnr, 'n', ',oi', '<cmd>OrganizeImports<CR>')
   buf_map(bufnr, 'n', '<Leader>a', '<cmd>LspDiagLine<CR>')
-  buf_map(bufnr, 'i', '<C-k>', '<cmd>LspSignatureHelp<CR>')
+  if client.supports_method('textDocument/signatureHelp') then
+    buf_map(bufnr, 'i', '<C-k>', '<cmd>LspSignatureHelp<CR>')
+  end
   buf_map(bufnr, 'n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
   buf_map(bufnr, 'n', ',rr', '<cmd>RustRunnable<CR>')
