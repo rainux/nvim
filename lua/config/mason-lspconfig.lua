@@ -7,7 +7,7 @@ require('mason-lspconfig').setup({
     'graphql',
     'pylsp',
     'rust_analyzer',
-    'sumneko_lua',
+    'lua_ls',
     'tailwindcss',
     'tsserver',
     'vimls',
@@ -68,7 +68,6 @@ require('mason-lspconfig').setup_handlers({
   function(server_name) -- default handler (optional)
     require('lspconfig')[server_name].setup(options)
   end,
-
   ['tsserver'] = function()
     local function organize_imports()
       local params = {
@@ -88,12 +87,10 @@ require('mason-lspconfig').setup_handlers({
       },
     }))
   end,
-
-  ['sumneko_lua'] = function()
-    options = vim.tbl_extend('force', options, require('lsp/sumneko_lua'))
-    require('lspconfig').sumneko_lua.setup(options)
+  ['lua_ls'] = function()
+    options = vim.tbl_extend('force', options, require('lsp/lua_ls'))
+    require('lspconfig').lua_ls.setup(options)
   end,
-
   ['rust_analyzer'] = function()
     -- TODO: Broken after migrate to mason
     options = vim.tbl_extend('force', options, require('lsp/rust_analyzer'))
@@ -110,7 +107,6 @@ require('mason-lspconfig').setup_handlers({
     -- Only if standalone support is needed
     -- require('rust-tools').start_standalone_if_required()
   end,
-
   -- Run the following command in a .py file to install plugins:
   --    :PylspInstall pyls-isort python-lsp-black
   ['pylsp'] = function()
