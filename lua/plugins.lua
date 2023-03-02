@@ -130,6 +130,7 @@ return require('packer').startup(function()
     },
     config = require_config('cmp'),
   })
+  use({ 'uga-rosa/cmp-dictionary', config = require_config('cmp-dictionary') })
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.

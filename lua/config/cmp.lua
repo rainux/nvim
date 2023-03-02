@@ -49,6 +49,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip', priority = 999 },
+    { name = "dictionary", keyword_length = 2, },
   }, {
     { name = 'buffer' },
   }),
