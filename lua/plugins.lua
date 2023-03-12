@@ -135,6 +135,12 @@ return require('packer').startup(function()
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
   use('simrat39/symbols-outline.nvim')
+  -- Highlight arguments' definitions and usages, using Treesitter
+  use({
+    'm-demare/hlargs.nvim',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = require_config('hlargs'),
+  })
   -- .............................................................................................................. }}}1
 
   -- Programming Language Support  ................................................................................ {{{1
@@ -144,6 +150,8 @@ return require('packer').startup(function()
   -- Modern Go plugin for Neovim, based on gopls, treesitter AST, Dap and a variety of go tools.
   use({ 'ray-x/go.nvim', config = require_config('go') })
   use('ray-x/guihua.lua') -- recommanded if need floating window support
+  -- MoonScript support for vim
+  use('leafo/moonscript-vim')
   -- JSON manipulation and pretty printing
   use('tpope/vim-jdaddy')
   -- .............................................................................................................. }}}1
