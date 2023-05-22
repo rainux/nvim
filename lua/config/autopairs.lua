@@ -1,5 +1,6 @@
 local autopairs = require('nvim-autopairs')
 local cond = require('nvim-autopairs.conds')
+local ts_conds = require('nvim-autopairs.ts-conds')
 local Rule = require('nvim-autopairs.rule')
 
 autopairs.setup({
@@ -7,15 +8,6 @@ autopairs.setup({
 })
 
 autopairs.add_rules({
-  -- ## arrow key on javascript
-  --
-  -- | Before    | Insert    | After          |
-  -- | --------  | --------- | ----------     |
-  -- | `(item)=` | `>`       | `(item)=> { }` |
-  Rule('%(.*%)%s*%=>$', ' {  }', { 'typescript', 'typescriptreact', 'javascript' })
-    :use_regex(true)
-    :set_end_pair_length(2),
-
   -- ## auto addspace on =
   --
   -- | Before          | Insert    | After           |
@@ -24,6 +16,7 @@ autopairs.add_rules({
   -- | `local data = ` | `=`       | `local data ==` |
   Rule('=', '')
     :with_pair(cond.not_inside_quote())
+    :with_pair(ts_conds.is_not_ts_node({ 'argument_list' }))
     :with_pair(function(opts)
       local last_char = opts.line:sub(opts.col - 1, opts.col - 1)
       if last_char:match('[%w%=%s]') then
