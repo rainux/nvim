@@ -7,6 +7,7 @@ require('mason-lspconfig').setup({
     'graphql',
     'rust_analyzer',
     'lua_ls',
+    'pyright',
     'tailwindcss',
     'tsserver',
     'vimls',
