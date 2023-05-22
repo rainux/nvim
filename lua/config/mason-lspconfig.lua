@@ -5,7 +5,6 @@ require('mason-lspconfig').setup({
     'gopls',
     'grammarly',
     'graphql',
-    'pylsp',
     'rust_analyzer',
     'lua_ls',
     'tailwindcss',
@@ -106,11 +105,5 @@ require('mason-lspconfig').setup_handlers({
     -- server:attach_buffers()
     -- Only if standalone support is needed
     -- require('rust-tools').start_standalone_if_required()
-  end,
-  -- Run the following command in a .py file to install plugins:
-  --    :PylspInstall pyls-isort python-lsp-black
-  ['pylsp'] = function()
-    options = vim.tbl_extend('force', options, require('lsp/pylsp'))
-    require('lspconfig').pylsp.setup(options)
   end,
 })
