@@ -131,6 +131,8 @@ return require('packer').startup(function()
   use({ 'uga-rosa/cmp-dictionary', config = require_config('cmp-dictionary') })
   -- Nvim Treesitter configurations and abstraction layer
   use({ 'nvim-treesitter/nvim-treesitter', config = require_config('treesitter'), run = ':TSUpdate' })
+  -- Treesitter playground integrated into Neovim
+  use({ 'nvim-treesitter/playground' })
   -- A tree like view for symbols in Neovim using the Language Server Protocol.
   use('simrat39/symbols-outline.nvim')
   -- Highlight arguments' definitions and usages, using Treesitter
