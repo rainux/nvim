@@ -31,58 +31,6 @@ cnoremap <Esc><C-B>    <S-Left>
 cnoremap <Esc><C-F>    <S-Right>
 " ....................................................................... }}}1
 
-" Navigate between windows and tabs  .................................... {{{1
-"
-" CTRL-[JKHL] Jump between windows
-noremap <C-J> <C-W>j
-noremap <C-K> <C-W>k
-noremap <C-H> <C-W>h
-noremap <C-L> <C-W>l
-
-" CTRL-Tab        Next tab
-map <C-Tab> gt
-imap <C-Tab> <Esc>gt
-cmap <C-Tab> <Esc>gt
-
-" CTRL-SHIFT-Tab  Previous tab
-map <C-S-Tab> gT
-imap <C-S-Tab> <Esc>gT
-cmap <C-S-Tab> <Esc>gT
-
-" ALT-[1-9]   Switch to specified tab
-for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	execute 'map <M-' . i . '> ' . i . 'gt'
-	execute 'imap <M-' . i . '> <Esc>' . i . 'gt'
-	execute 'cmap <M-' . i . '> <Esc>' . i . 'gt'
-endfor
-
-" ⌘-[1-9]   Switch to specified tab
-for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	exec printf('map <D-%d> <cmd>BufferLineGoToBuffer %d<CR>', i, i)
-	exec printf('imap <D-%d> <cmd>BufferLineGoToBuffer %d<CR>', i, i)
-endfor
-map <D-0> :tablast<CR>
-imap <D-0> <Esc>:tablast<CR>a
-" ....................................................................... }}}1
-
-" Windows convention compatibility  ..................................... {{{1
-"
-" CTRL-X and SHIFT-Del are Cut
-vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
-
-" CTRL-C and CTRL-Insert are Copy
-vnoremap <C-C> "+y
-vnoremap <C-Insert> "+y
-
-" CTRL-V and SHIFT-Insert are Paste
-map <C-V>		"+gP
-map <S-Insert>		"+gP
-
-cmap <C-V>		<C-R>+
-cmap <S-Insert>		<C-R>+
-"  ...................................................................... }}}1
-
 " Essential toggles  .................................................... {{{1
 "
 " ,k    Toggle iskeyword contain or not contain '_'
