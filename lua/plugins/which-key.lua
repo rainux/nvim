@@ -92,6 +92,21 @@ local vmode_mappings = {
   },
 }
 
+local chalk_nmode_mappings = {
+  ['zf'] = { '<Plug>Chalk', 'Create fold at operator movement' },
+  ['zF'] = { '<Plug>ChalkRange', 'Create fold for specified number of lines' },
+  ['Zf'] = { '<Plug>SingleChalk', 'Create single (opening) fold marker at current level or specified count' },
+  ['ZF'] = { '<Plug>SingleChalkUp', 'Create single (opening) fold marker at next level or specified count' },
+  ['=z'] = { '<Plug>ChalkUp', 'Increment current fold level' },
+  ['-z'] = { '<Plug>ChalkDown', 'Decrement current fold level' },
+}
+
+local chalk_vmode_mappings = {
+  ['zf'] = { '<Plug>Chalk', 'Create fold at visual selection' },
+  ['=z'] = { '<Plug>ChalkUp', 'Increment levels in selection' },
+  ['-z'] = { '<Plug>ChalkDown', 'Decrement levels in selection' },
+}
+
 return {
   -- WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
   {
@@ -100,6 +115,8 @@ return {
       local wk = require('which-key')
       wk.register(nmode_mappings, { mode = 'n', prefix = ',' })
       wk.register(vmode_mappings, { mode = 'v', prefix = ',' })
+      wk.register(chalk_nmode_mappings, { mode = 'n' })
+      wk.register(chalk_vmode_mappings, { mode = 'v' })
     end,
   },
 }
