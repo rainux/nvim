@@ -141,32 +141,6 @@ nmap ,pi  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerInstall<CR>:Packe
 nmap ,pu  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerSync<CR>
 " ....................................................................... }}}1
 
-" Git related keymappings  .............................................. {{{1
-"
-" vim-fugitive
-nmap ,gac :Gcommit --amend --verbose<CR>
-nmap ,gb  :Git blame<CR>
-nmap ,gc  :Git commit --verbose<CR>
-nmap ,gd  :Gvdiff<CR>
-nmap ,gi  :Gsplit! diff<CR><C-W>_
-nmap ,gk  :Gvdiff HEAD<CR><C-W>_
-nmap ,gl  :Gllog<CR>
-nmap ,ge  :Gedit<CR>
-nmap ,gg  :Ggrep<Space>
-nmap ,gr  :Gread<CR>
-nmap ,gs  :Gstatus<CR>
-nmap ,gw  :Gwrite<CR>
-nmap ,gf  :Git difftool<CR>
-nmap ,gm  :Git mergetool<CR>
-" ....................................................................... }}}1
-
-" Diff mode key mappings  ............................................... {{{1
-"
-" <C-J/K>   Move cursor between diff chunks
-nnoremap <expr> <C-J> &diff ? ']c' : '<C-W>j'
-nnoremap <expr> <C-K> &diff ? '[c' : '<C-W>k'
-" ....................................................................... }}}1
-
 " Close various informative/minor window with `q`  ...................... {{{1
 "
 " Close left window (original file) in diff mode

@@ -58,3 +58,17 @@ vim.api.nvim_set_keymap('i', '<S-Insert>', '<C-R>+', { noremap = true, silent = 
 vim.api.nvim_set_keymap('c', '<C-V>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('c', '<S-Insert>', '<C-R>+', { noremap = true, silent = true })
 --  ..................................................................... }}}1
+
+-- Diff mode key mappings  .............................................. {{{1
+--
+-- <C-J/K>   Move cursor between diff chunks or windows
+vim.keymap.set('n', '<C-J>', function()
+  local keys = vim.wo.diff and ']c' or '<C-W>j'
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
+end, { noremap = true, desc = 'Move cursor between diff chunks or windows down' })
+
+vim.keymap.set('n', '<C-K>', function()
+  local keys = vim.wo.diff and '[c' or '<C-W>k'
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
+end, { noremap = true, desc = 'Move cursor between diff chunks or windows up' })
+-- ...................................................................... }}}1
