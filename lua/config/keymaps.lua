@@ -72,3 +72,20 @@ vim.keymap.set('n', '<C-K>', function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
 end, { noremap = true, desc = 'Move cursor between diff chunks or windows up' })
 -- ...................................................................... }}}1
+
+-- Close various informative/minor window with `q`  ..................... {{{1
+--
+vim.cmd([[
+" Close left window (original file) in diff mode
+nnoremap <expr> q &diff ? ':diffoff<CR><C-W>h:q<CR>' : 'q'
+" Close Vim help window
+autocmd FileType help nnoremap <buffer> q :q<CR>
+" Close vim-fugitive window
+autocmd FileType fugitive,git,gitcommit nnoremap <buffer> q :q<CR>
+" Close netrw window
+autocmd FileType netrw nnoremap <buffer> q :q<CR>
+autocmd FileType netrw nnoremap <buffer> <C-L> <C-W>l
+" Close QuickFix & Location window
+autocmd FileType qf nnoremap <buffer> q :q<CR>
+]])
+-- ...................................................................... }}}1

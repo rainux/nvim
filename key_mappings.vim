@@ -141,21 +141,6 @@ nmap ,pi  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerInstall<CR>:Packe
 nmap ,pu  :source $HOME/.config/nvim/lua/plugins.lua<CR>:PackerSync<CR>
 " ....................................................................... }}}1
 
-" Close various informative/minor window with `q`  ...................... {{{1
-"
-" Close left window (original file) in diff mode
-nnoremap <expr> q &diff ? ':diffoff<CR><C-W>h:q<CR>' : 'q'
-" Close Vim help window
-autocmd FileType help nnoremap <buffer> q :q<CR>
-" Close vim-fugitive window
-autocmd FileType fugitive,git,gitcommit nnoremap <buffer> q :q<CR>
-" Close netrw window
-autocmd FileType netrw nnoremap <buffer> q :q<CR>
-autocmd FileType netrw nnoremap <buffer> <C-L> <C-W>l
-" Close QuickFix & Location window
-autocmd FileType qf nnoremap <buffer> q :q<CR>
-" ....................................................................... }}}1
-
 " Default mappings coming from plugins  ................................. {{{1
 "
 " \di \ds           Start/Stop DrawIt
