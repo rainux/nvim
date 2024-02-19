@@ -1,5 +1,3 @@
-local wk = require('which-key')
-
 -- Helper functions  .............................................................................................. {{{1
 local function toggle_columns()
   if vim.o.number then
@@ -14,10 +12,9 @@ local function toggle_columns()
     print('Collumns enabled')
   end
 end
-
 -- ................................................................................................................ }}}1
 
-wk.register({
+local nmode_mappings = {
   c = {
     name = 'Convenient Commands',
     c = { '<Plug>NERDCommenterComment', 'NERDCommenter Comment' },
@@ -62,9 +59,9 @@ wk.register({
     s = { '<cmd>set spell!<CR>', 'Spell Check' },
     w = { '<cmd>set wrap!<CR>', 'Wrap' },
   },
-}, { mode = 'n', prefix = ',' })
+}
 
-wk.register({
+local vmode_mappings = {
   c = {
     name = 'NERDCommenter',
     c = { '<Plug>NERDCommenterComment', 'NERDCommenter Comment' },
@@ -74,6 +71,18 @@ wk.register({
     u = { '<Plug>NERDCommenterUncomment', 'NERDCommenter Uncomment' },
     ['<Space>'] = { '<Plug>NERDCommenterToggle', 'NERDCommenter Toggle' },
   },
-}, { mode = 'v', prefix = ',' })
+}
+
+return {
+  -- WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
+  {
+    'folke/which-key.nvim',
+    config = function()
+      local wk = require('which-key')
+      wk.register(nmode_mappings, { mode = 'n', prefix = ',' })
+      wk.register(vmode_mappings, { mode = 'v', prefix = ',' })
+    end,
+  },
+}
 
 -- vim: set fdm=marker fdl=0 tw=120:
