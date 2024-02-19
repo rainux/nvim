@@ -105,8 +105,10 @@ return require('packer').startup(function()
     'williamboman/mason-lspconfig.nvim',
     config = require_config('mason-lspconfig'),
   })
-  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-  use({ 'jose-elias-alvarez/null-ls.nvim', config = require_config('null-ls') })
+  -- An asynchronous linter plugin for Neovim complementary to the built-in Language Server Protocol support.
+  use({ 'mfussenegger/nvim-lint', config = require_config('lint') })
+  -- Lightweight yet powerful formatter plugin for Neovim
+  use({ 'stevearc/conform.nvim', config = require_config('conform') })
   -- LSP Progress lualine componenet
   use('arkav/lualine-lsp-progress')
   -- Pop-up menu for code actions to show meta-information and diff preview
