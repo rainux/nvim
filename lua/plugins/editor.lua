@@ -9,7 +9,7 @@ return {
   {
     'dbmrq/vim-chalk',
     config = function()
-      vim.g.chalk_char = '.'
+      vim.g.chalk_char = '-'
       vim.g.chalk_edit = 0
 
       vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {

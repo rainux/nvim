@@ -5,7 +5,38 @@
 vim.keymap.del({ 'n', 'x' }, 'j')
 vim.keymap.del({ 'n', 'x' }, 'k')
 
--- Navigate between windows and tabs  ................................... {{{1
+-- Navigate in content  ------------------------------------------------------------------------------------------- {{{1
+--
+-- Up & Down   Navigate display line upward & downward
+vim.keymap.set('n', '<Up>', 'gk', { silent = true })
+vim.keymap.set('n', '<Down>', 'gj', { silent = true })
+vim.keymap.set('i', '<Up>', '<Esc><Up>a', { silent = true })
+vim.keymap.set('i', '<Down>', '<Esc><Down>a', { silent = true })
+
+-- Emacs-style editing on the command-line
+vim.cmd([[
+" start of line
+cnoremap <C-A>         <Home>
+" back one character
+cnoremap <C-B>         <Left>
+" delete character under cursor
+cnoremap <C-D>         <Del>
+" end of line
+cnoremap <C-E>         <End>
+" forward one character
+cnoremap <C-F>         <Right>
+" recall newer command-line
+cnoremap <C-N>         <Down>
+" recall previous (older) command-line
+cnoremap <C-P>         <Up>
+" back one word
+cnoremap <Esc><C-B>    <S-Left>
+" forward one word
+cnoremap <Esc><C-F>    <S-Right>
+]])
+--  --------------------------------------------------------------------------------------------------------------- }}}1
+
+-- Navigate between windows and tabs  ----------------------------------------------------------------------------- {{{1
 --
 -- CTRL-Tab for Next tab
 vim.api.nvim_set_keymap('n', '<C-Tab>', 'gt', { noremap = true, silent = true })
@@ -17,7 +48,7 @@ vim.api.nvim_set_keymap('n', '<C-S-Tab>', 'gT', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('i', '<C-S-Tab>', '<Esc>gT', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('c', '<C-S-Tab>', '<C-\\><C-N>gT', { noremap = true, silent = true })
 
--- ⌘-[1-9]    Switch to specified buffer
+-- ⌘-[1-9]  Switch to specified buffer
 for i = 1, 9 do
   vim.api.nvim_set_keymap(
     'n',
@@ -33,12 +64,12 @@ for i = 1, 9 do
   )
 end
 
--- Mapping for <D-0> to go to the last tab
+-- ⌘-0      Go to the last tab
 vim.api.nvim_set_keymap('n', '<D-0>', ':tablast<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<D-0>', '<Esc>:tablast<CR>a', { noremap = true, silent = true })
---  ..................................................................... }}}1
+--  --------------------------------------------------------------------------------------------------------------- }}}1
 
--- Windows convention compatibility  .................................... {{{1
+-- Windows convention compatibility  ------------------------------------------------------------------------------ {{{1
 --
 -- Cut with CTRL-X and SHIFT-Del in visual mode
 vim.api.nvim_set_keymap('v', '<C-X>', '"+x', { noremap = true, silent = true })
@@ -57,9 +88,9 @@ vim.api.nvim_set_keymap('i', '<S-Insert>', '<C-R>+', { noremap = true, silent = 
 -- Paste with CTRL-V and SHIFT-Insert in command mode
 vim.api.nvim_set_keymap('c', '<C-V>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('c', '<S-Insert>', '<C-R>+', { noremap = true, silent = true })
---  ..................................................................... }}}1
+--  --------------------------------------------------------------------------------------------------------------- }}}1
 
--- Diff mode key mappings  .............................................. {{{1
+-- Diff mode key mappings  ---------------------------------------------------------------------------------------- {{{1
 --
 -- <C-J/K>   Move cursor between diff chunks or windows
 vim.keymap.set('n', '<C-J>', function()
@@ -71,9 +102,9 @@ vim.keymap.set('n', '<C-K>', function()
   local keys = vim.wo.diff and '[c' or '<C-W>k'
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
 end, { noremap = true, desc = 'Move cursor between diff chunks or windows up' })
---  ..................................................................... }}}1
+--  --------------------------------------------------------------------------------------------------------------- }}}1
 
--- Close various informative/minor window with `q` ...................... {{{1
+-- Close various informative/minor window with `q`  --------------------------------------------------------------- {{{1
 vim.cmd([[
 " Close left window (original file) in diff mode
 nnoremap <expr> q &diff ? ':diffoff<CR><C-W>h:q<CR>' : 'q'
@@ -87,5 +118,6 @@ autocmd FileType netrw nnoremap <buffer> <C-L> <C-W>l
 " Close QuickFix & Location window
 autocmd FileType qf nnoremap <buffer> q :q<CR>
 ]])
---  ..................................................................... }}}1
--- vim: set fdm=marker fdl=1 textwidth=78:
+--  --------------------------------------------------------------------------------------------------------------- }}}1
+
+-- vim: set fdm=marker fdl=1 textwidth=120:
