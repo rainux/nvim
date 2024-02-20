@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- Override LazyVim default keymaps
 vim.keymap.del({ 'n', 'x' }, 'j')
 vim.keymap.del({ 'n', 'x' }, 'k')
 
@@ -39,55 +40,45 @@ cnoremap <Esc><C-F>    <S-Right>
 -- Navigate between windows and tabs  ----------------------------------------------------------------------------- {{{1
 --
 -- CTRL-Tab for Next tab
-vim.api.nvim_set_keymap('n', '<C-Tab>', 'gt', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-Tab>', '<Esc>gt', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('c', '<C-Tab>', '<C-\\><C-N>gt', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Tab>', 'gt', { silent = true })
+vim.keymap.set('i', '<C-Tab>', '<Esc>gt', { silent = true })
+vim.keymap.set('c', '<C-Tab>', '<C-\\><C-N>gt', { silent = true })
 
 -- CTRL-SHIFT-Tab for Previous tab
-vim.api.nvim_set_keymap('n', '<C-S-Tab>', 'gT', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-S-Tab>', '<Esc>gT', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('c', '<C-S-Tab>', '<C-\\><C-N>gT', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-S-Tab>', 'gT', { silent = true })
+vim.keymap.set('i', '<C-S-Tab>', '<Esc>gT', { silent = true })
+vim.keymap.set('c', '<C-S-Tab>', '<C-\\><C-N>gT', { silent = true })
 
 -- ⌘-[1-9]  Switch to specified buffer
 for i = 1, 9 do
-  vim.api.nvim_set_keymap(
-    'n',
-    '<D-' .. i .. '>',
-    '<cmd>BufferLineGoToBuffer ' .. i .. '<CR>',
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'i',
-    '<D-' .. i .. '>',
-    '<cmd>BufferLineGoToBuffer ' .. i .. '<CR>',
-    { noremap = true, silent = true }
-  )
+  vim.keymap.set('n', '<D-' .. i .. '>', '<cmd>BufferLineGoToBuffer ' .. i .. '<CR>', { silent = true })
+  vim.keymap.set('i', '<D-' .. i .. '>', '<cmd>BufferLineGoToBuffer ' .. i .. '<CR>', { silent = true })
 end
 
 -- ⌘-0      Go to the last tab
-vim.api.nvim_set_keymap('n', '<D-0>', ':tablast<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<D-0>', '<Esc>:tablast<CR>a', { noremap = true, silent = true })
+vim.keymap.set('n', '<D-0>', ':tablast<CR>', { silent = true })
+vim.keymap.set('i', '<D-0>', '<Esc>:tablast<CR>a', { silent = true })
 --  --------------------------------------------------------------------------------------------------------------- }}}1
 
 -- Windows convention compatibility  ------------------------------------------------------------------------------ {{{1
 --
 -- Cut with CTRL-X and SHIFT-Del in visual mode
-vim.api.nvim_set_keymap('v', '<C-X>', '"+x', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<S-Del>', '"+x', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-X>', '"+x', { silent = true })
+vim.keymap.set('v', '<S-Del>', '"+x', { silent = true })
 
 -- Copy with CTRL-C and CTRL-Insert in visual mode
-vim.api.nvim_set_keymap('v', '<C-C>', '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<C-Insert>', '"+y', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-C>', '"+y', { silent = true })
+vim.keymap.set('v', '<C-Insert>', '"+y', { silent = true })
 
 -- Paste with CTRL-V and SHIFT-Insert in normal and insert modes
-vim.api.nvim_set_keymap('n', '<C-V>', '"+gP', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Insert>', '"+gP', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-V>', '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Insert>', '<C-R>+', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-V>', '"+gP', { silent = true })
+vim.keymap.set('n', '<S-Insert>', '"+gP', { silent = true })
+vim.keymap.set('i', '<C-V>', '<C-R>+', { silent = true })
+vim.keymap.set('i', '<S-Insert>', '<C-R>+', { silent = true })
 
 -- Paste with CTRL-V and SHIFT-Insert in command mode
-vim.api.nvim_set_keymap('c', '<C-V>', '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('c', '<S-Insert>', '<C-R>+', { noremap = true, silent = true })
+vim.keymap.set('c', '<C-V>', '<C-R>+', { silent = true })
+vim.keymap.set('c', '<S-Insert>', '<C-R>+', { silent = true })
 --  --------------------------------------------------------------------------------------------------------------- }}}1
 
 -- Diff mode key mappings  ---------------------------------------------------------------------------------------- {{{1
@@ -96,12 +87,12 @@ vim.api.nvim_set_keymap('c', '<S-Insert>', '<C-R>+', { noremap = true, silent = 
 vim.keymap.set('n', '<C-J>', function()
   local keys = vim.wo.diff and ']c' or '<C-W>j'
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
-end, { noremap = true, desc = 'Move cursor between diff chunks or windows down' })
+end, { silent = true })
 
 vim.keymap.set('n', '<C-K>', function()
   local keys = vim.wo.diff and '[c' or '<C-W>k'
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), 'n', false)
-end, { noremap = true, desc = 'Move cursor between diff chunks or windows up' })
+end, { silent = true })
 --  --------------------------------------------------------------------------------------------------------------- }}}1
 
 -- Close various informative/minor window with `q`  --------------------------------------------------------------- {{{1
