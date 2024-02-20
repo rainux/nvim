@@ -27,4 +27,7 @@ return {
       },
     },
   },
+
+  -- MoonScript support for vim
+  { 'leafo/moonscript-vim' },
 }
