@@ -48,6 +48,10 @@ return {
       })
     end,
   },
+  -- Color schemes
+  { 'rainux/base16-vim' },
+  { 'LunarVim/onedarker.nvim' },
+  { 'lunarvim/darkplus.nvim' },
 }
 
 -- vim: set fdm=marker fdl=0 textwidth=120:
