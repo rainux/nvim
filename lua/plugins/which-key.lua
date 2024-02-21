@@ -1,4 +1,4 @@
--- Helper functions  .............................................................................................. {{{1
+-- Helper functions  ---------------------------------------------------------------------------------------------- {{{1
 local function toggle_columns()
   if vim.o.number then
     vim.o.colorcolumn = '0'
@@ -12,7 +12,7 @@ local function toggle_columns()
     print('Collumns enabled')
   end
 end
--- ................................................................................................................ }}}1
+--  --------------------------------------------------------------------------------------------------------------- }}}1
 
 local nmode_mappings = {
   c = {
@@ -47,7 +47,7 @@ local nmode_mappings = {
     e = { ':Gedit<CR>', 'Edit' },
     g = { ':Ggrep<Space>', 'Grep' },
     r = { ':Gread<CR>', 'Read' },
-    s = { ':Gstatus<CR>', 'Status' },
+    s = { ':Neogit<CR>', 'Status' },
     w = { ':Gwrite<CR>', 'Write' },
     f = { ':Git difftool<CR>', 'Diff Tool' },
     m = { ':Git mergetool<CR>', 'Merge Tool' },
