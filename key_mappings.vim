@@ -16,71 +16,12 @@ function! s:ToggleIsKeyword(char) " ..................................... {{{2
 endfunction " ........................................................... }}}2
 " ....................................................................... }}}1
 
-" Search & Replace  ..................................................... {{{1
-"
-" ,*    Substitute(Replace)
-nmap ,* :%s/<C-R><C-W>/
-" ....................................................................... }}}1
-
 " General text editing  ................................................. {{{1
 "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-" ....................................................................... }}}1
-
-" Work with code  ....................................................... {{{1
-
-" ,cd   Change buffer directory to current file's parent
-map ,cd :lcd %:p:h<CR>
-
-" ,sr     Compile and Run with SingleCompile
-nmap ,sr  :SCCompileRun<CR>
-" ,sc     Compile with SingleCompile
-nmap ,sc  :SCCompile<CR>
-
-" ,cw ,cq   Open and close quickfix window
-nmap ,cw  :cwindow<CR>
-nmap ,cq  :cclose<CR>
-" ,lw ,lq   Open and close location window
-nmap ,lw  :lwindow<CR>
-nmap ,lq  :lclose<CR>
-" ,, ,. ,m  Jump to current, next or prev error in quickfix list
-nmap ,, :cc<CR>
-nmap ,. :cnext<CR>
-nmap ,m :cNext<CR>
-" ,< ,> ,M  Jump to current, next or prev error in location list
-nmap ,< :ll<CR>
-nmap ,> :lnext<CR>
-nmap ,M :lNext<CR>
-
-" ""  List contents of all registers (that typically contain pasteable text).
-nnoremap <silent> "" :registers "0123456789abcdefghijklmnopqrstuvwxyz*+.<CR>
-
-" Don't use Ex mode, use Q for formatting
-nmap Q gq
-" ,ff   Format code
-nmap ,ff :set ff=unix<CR>:%!fromdos<CR>gg=G:%s/\s\+$//ge<CR>
-" ,fc   Clean code
-nmap ,fc :set ff=unix<CR>:%!fromdos<CR>:%s/\s\+$//ge<CR>
-" \ftu  Convert to UTF-8
-nmap <Leader>ftu   :set fenc=utf8<CR>:w<CR>
-" \ftg  Convert to GBK
-nmap <Leader>ftg   :set fenc=gbk<CR>:w<CR>
-
-" \str  Convert double quotation string to single quotation
-nmap <Leader>str :%s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>
-vmap <Leader>str :s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>
-" \sym  String to Symbol for Ruby
-nmap <Leader>sym :%s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>
-vmap <Leader>sym :s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>
-" \hash Convert hash to Ruby 1.9's JSON-like style
-nmap <Leader>hash :%s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>
-vmap <Leader>hash :s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>
-" \url  Convert url to a relative path
-nmap <Leader>url :%s/https\?:\/\/[^/]\+\/\@=//gce<CR>
-vmap <Leader>url :s/https\?:\/\/[^/]\+\/\@=//gce<CR>
 " ....................................................................... }}}1
 
 " Rust development  ..................................................... {{{1
