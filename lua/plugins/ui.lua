@@ -39,10 +39,13 @@ return {
     'nvim-lualine/lualine.nvim',
     opts = function(_, opts)
       local lualine_x = opts['sections']['lualine_x']
+      local lualine_y = opts['sections']['lualine_y']
 
       return vim.tbl_deep_extend('force', opts, {
         sections = {
-          lualine_x = vim.list_extend({ get_char_code, 'filesize', 'encoding', 'fileformat' }, lualine_x),
+          lualine_x = { get_char_code, 'filesize', 'encoding', 'fileformat' },
+          lualine_y = lualine_x,
+          lualine_z = lualine_y,
         },
         extensions = { 'fugitive', 'lazy', 'mason', 'nvim-tree', 'quickfix', 'symbols-outline', 'trouble' },
       })
