@@ -1,21 +1,6 @@
 " ----------------------------------------------------------------------------
 " Key mappings
 "
-" Essential toggles  .................................................... {{{1
-"
-" ,k    Toggle iskeyword contain or not contain '_'
-map ,k  :call <SID>ToggleIsKeyword('_')<CR>
-function! s:ToggleIsKeyword(char) " ..................................... {{{2
-  if stridx(&iskeyword, a:char) < 0
-    exec 'setlocal iskeyword+=' . a:char
-    echo '&iskeyword now contain "' . a:char . '"'
-  else
-    exec 'setlocal iskeyword-=' . a:char
-    echo '&iskeyword now not contain "' . a:char . '"'
-  endif
-endfunction " ........................................................... }}}2
-" ....................................................................... }}}1
-
 " General text editing  ................................................. {{{1
 "
 " Start interactive EasyAlign in visual mode (e.g. vipga)

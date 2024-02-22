@@ -21,6 +21,26 @@ local function substitute_current_word()
   -- Use feedkeys to input the command and wait for the user to enter the replacement
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), 'n', false)
 end
+
+_G.use_subword_motion = false
+local function toggle_subword_motion()
+  _G.use_subword_motion = not _G.use_subword_motion
+
+  if _G.use_subword_motion then
+    vim.keymap.set({ 'n', 'o', 'x' }, 'w', function() require('spider').motion('w') end)
+    vim.keymap.set({ 'n', 'o', 'x' }, 'e', function() require('spider').motion('e') end)
+    vim.keymap.set({ 'n', 'o', 'x' }, 'b', function() require('spider').motion('b') end)
+    vim.keymap.set({ 'o', 'x' }, 'aw', function() require('various-textobjs').subword('outer') end)
+    vim.keymap.set({ 'o', 'x' }, 'iw', function() require('various-textobjs').subword('inner') end)
+  else
+    vim.keymap.del({ 'n', 'o', 'x' }, 'w')
+    vim.keymap.del({ 'n', 'o', 'x' }, 'e')
+    vim.keymap.del({ 'n', 'o', 'x' }, 'b')
+    vim.keymap.del({ 'o', 'x' }, 'aw')
+    vim.keymap.del({ 'o', 'x' }, 'iw')
+  end
+  print('Subword motion and textobj is now ' .. (_G.use_subword_motion and 'enabled' or 'disabled'))
+end
 --  --------------------------------------------------------------------------------------------------------------- }}}2
 
 local primary_nmappings = {
@@ -82,6 +102,7 @@ local primary_nmappings = {
     c = { toggle_columns, 'Columns' },
     h = { '<cmd>set hlsearch!<CR>', 'Highlight Search' },
     i = { '<cmd>IndentBlanklineToggle<CR>', 'Indent Blankline' },
+    _ = { toggle_subword_motion, 'Toggle subword motion and textobject' },
     l = { '<cmd>TagbarToggle<CR>', 'Tagbar' },
     o = { '<cmd>SymbolsOutline<CR>', 'Symbol Outline' },
     s = { '<cmd>set spell!<CR>', 'Spell Check' },
