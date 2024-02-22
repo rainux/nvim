@@ -12,15 +12,18 @@ return {
 
           ['<Tab>'] = cmp.mapping.confirm({ select = true }),
         },
-        sources = cmp.config.sources({
-          { name = 'dictionary', keyword_length = 2 },
-        }),
       })
     end,
   },
   -- A dictionary completion source for nvim-cmp
   {
     'uga-rosa/cmp-dictionary',
+    dependencies = {
+      'nvim-cmp',
+      opts = function(_, opts)
+        table.insert(opts.sources, { name = 'dictionary', keyword_length = 2 })
+      end,
+    },
     opts = {
       paths = { vim.fn.stdpath('config') .. '/assets/english.dict' },
       exact_length = 2,
