@@ -30,6 +30,7 @@ require('lazy').setup({
   },
   install = { colorscheme = { 'tokyonight', 'habamax' } },
   checker = { enabled = false }, -- It's so fucking crazy to automatically check for plugin updates on startup
+  change_detection = { notify = false }, -- No annoying notification, just do the reloading!
   performance = {
     rtp = {
       -- disable some rtp plugins
