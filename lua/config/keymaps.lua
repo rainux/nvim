@@ -3,12 +3,14 @@
 -- Add any additional keymaps here
 
 -- Override LazyVim default keymaps
+--
+-- Map j/k to gj/gk is so inconvenient when browsing text with long lines
 vim.keymap.del({ 'n', 'x' }, 'j')
 vim.keymap.del({ 'n', 'x' }, 'k')
 
 -- Navigate in content  ------------------------------------------------------------------------------------------- {{{1
 --
--- Up & Down   Navigate display line upward & downward
+-- Up & Down    Navigate display line upward & downward
 vim.keymap.set('n', '<Up>', 'gk', { silent = true })
 vim.keymap.set('n', '<Down>', 'gj', { silent = true })
 vim.keymap.set('i', '<Up>', '<Esc><Up>a', { silent = true })
