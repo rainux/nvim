@@ -12,6 +12,10 @@ return {
   -- Bundle of more than 30 new text objects for Neovim.
   { 'chrisgrieser/nvim-various-textobjs', lazy = false, opts = { useDefaultKeymaps = false } },
 
+  -- Automatic indentation style detection for Neovim
+  -- TODO: This only required due to VimR's bug related to filetype detection
+  { 'nmac427/guess-indent.nvim', config = true },
+
   -- Better fold markers
   {
     'dbmrq/vim-chalk',

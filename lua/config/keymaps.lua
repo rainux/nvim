@@ -100,6 +100,7 @@ end, { silent = true })
 -- Close various informative/minor window with `q`  --------------------------------------------------------------- {{{1
 vim.cmd([[
 " Close left window (original file) in diff mode
+" FIXME: This not work for fugitive diff window when cursor in the left window
 nnoremap <expr> q &diff ? ':diffoff<CR><C-W>h:q<CR>' : 'q'
 " Close Vim help window
 autocmd FileType help nnoremap <buffer> q :q<CR>

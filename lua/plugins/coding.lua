@@ -1,6 +1,5 @@
 return {
   {
-    -- A completion plugin for neovim coded in Lua.
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       local cmp = require('cmp')
@@ -15,7 +14,6 @@ return {
       })
     end,
   },
-  -- A dictionary completion source for nvim-cmp
   {
     'uga-rosa/cmp-dictionary',
     dependencies = {

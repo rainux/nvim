@@ -27,11 +27,21 @@ local function toggle_subword_motion()
   _G.use_subword_motion = not _G.use_subword_motion
 
   if _G.use_subword_motion then
-    vim.keymap.set({ 'n', 'o', 'x' }, 'w', function() require('spider').motion('w') end)
-    vim.keymap.set({ 'n', 'o', 'x' }, 'e', function() require('spider').motion('e') end)
-    vim.keymap.set({ 'n', 'o', 'x' }, 'b', function() require('spider').motion('b') end)
-    vim.keymap.set({ 'o', 'x' }, 'aw', function() require('various-textobjs').subword('outer') end)
-    vim.keymap.set({ 'o', 'x' }, 'iw', function() require('various-textobjs').subword('inner') end)
+    vim.keymap.set({ 'n', 'o', 'x' }, 'w', function()
+      require('spider').motion('w')
+    end)
+    vim.keymap.set({ 'n', 'o', 'x' }, 'e', function()
+      require('spider').motion('e')
+    end)
+    vim.keymap.set({ 'n', 'o', 'x' }, 'b', function()
+      require('spider').motion('b')
+    end)
+    vim.keymap.set({ 'o', 'x' }, 'aw', function()
+      require('various-textobjs').subword('outer')
+    end)
+    vim.keymap.set({ 'o', 'x' }, 'iw', function()
+      require('various-textobjs').subword('inner')
+    end)
   else
     vim.keymap.del({ 'n', 'o', 'x' }, 'w')
     vim.keymap.del({ 'n', 'o', 'x' }, 'e')
@@ -105,7 +115,7 @@ local primary_nmappings = {
     i = { '<cmd>IndentBlanklineToggle<CR>', 'Indent Blankline' },
     _ = { toggle_subword_motion, 'Toggle subword motion and textobject' },
     l = { '<cmd>TagbarToggle<CR>', 'Tagbar' },
-    o = { '<cmd>SymbolsOutline<CR>', 'Symbol Outline' },
+    o = { '<cmd>Outline<CR>', 'Outline' },
     s = { '<cmd>set spell!<CR>', 'Spell Check' },
     w = { '<cmd>set wrap!<CR>', 'Wrap' },
   },
