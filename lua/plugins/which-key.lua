@@ -22,6 +22,17 @@ local function substitute_current_word()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), 'n', false)
 end
 
+local function copy_diagnostic_to_clipboard()
+  local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+  local lines = {}
+  for _, diag in ipairs(diagnostics) do
+    table.insert(lines, diag.message)
+  end
+  local message = table.concat(lines, '\n')
+  vim.fn.setreg('+', message)
+  print('Diagnostic copied to clipboard')
+end
+
 _G.use_subword_motion = false
 local function toggle_subword_motion()
   _G.use_subword_motion = not _G.use_subword_motion
@@ -54,6 +65,9 @@ local primary_nmappings = {
     k = { '<cmd>Telescope keymaps<CR>', 'Telescope Keymaps' },
     l = { '<cmd>Telescope colorscheme<CR>', 'Telescope Color Scheme' },
     r = { '<cmd>Telescope oldfiles<CR>', 'Open Recent File' },
+  },
+  d = {
+    c = { copy_diagnostic_to_clipboard, 'Copy Diagnostic to Clipboard' },
   },
   g = {
     name = 'Git',
@@ -98,7 +112,7 @@ local primary_nmappings = {
     i = { '<cmd>IndentBlanklineToggle<CR>', 'Indent Blankline' },
     _ = { toggle_subword_motion, 'Toggle subword motion and textobject' },
     l = { '<cmd>TagbarToggle<CR>', 'Tagbar' },
-    o = { '<cmd>SymbolsOutline<CR>', 'Symbol Outline' },
+    o = { '<cmd>Outline<CR>', 'Outline' },
     s = { '<cmd>set spell!<CR>', 'Spell Check' },
     w = { '<cmd>set wrap!<CR>', 'Wrap' },
   },
