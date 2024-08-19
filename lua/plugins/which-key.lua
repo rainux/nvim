@@ -46,13 +46,6 @@ end
 local primary_nmappings = {
   c = {
     name = 'Convenient Commands',
-    c = { '<Plug>NERDCommenterComment', 'NERDCommenter Comment' },
-    m = { '<Plug>NERDCommenterMinimal', 'NERDCommenter Minimal' },
-    n = { '<Plug>NERDCommenterNest', 'NERDCommenter Nest' },
-    s = { '<Plug>NERDCommenterSexy', 'NERDCommenter Sexy' },
-    u = { '<Plug>NERDCommenterUncomment', 'NERDCommenter Uncomment' },
-    ['<Space>'] = { '<Plug>NERDCommenterToggle', 'NERDCommenter Toggle' },
-
     t = { '<cmd>Telescope<CR>', 'Telescope' },
     b = { '<cmd>Telescope buffers<CR>', 'Telescope Buffers' },
     f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
@@ -137,17 +130,7 @@ local primary_nmappings = {
   --  ------------------------------------------------------------------------------------------------------------- }}}1
 }
 
-local primary_vmappings = {
-  c = {
-    name = 'NERDCommenter',
-    c = { '<Plug>NERDCommenterComment', 'NERDCommenter Comment' },
-    m = { '<Plug>NERDCommenterMinimal', 'NERDCommenter Minimal' },
-    n = { '<Plug>NERDCommenterNest', 'NERDCommenter Nest' },
-    s = { '<Plug>NERDCommenterSexy', 'NERDCommenter Sexy' },
-    u = { '<Plug>NERDCommenterUncomment', 'NERDCommenter Uncomment' },
-    ['<Space>'] = { '<Plug>NERDCommenterToggle', 'NERDCommenter Toggle' },
-  },
-}
+local primary_vmappings = {}
 
 local secondary_nmappings = {
   ['ftu'] = { ':set fenc=utf8<CR>:w<CR>', 'Convert buffer to UTF-8 encoding' },
