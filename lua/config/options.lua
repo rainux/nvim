@@ -27,7 +27,9 @@ opt.showmode = false -- Do not show mode text (e.g., -- INSERT --) since the sta
 opt.number = true -- Show line numbers
 opt.shada = "!,'1000,<100,f1,h,s10" -- Save more history and save marks in session info
 opt.showbreak = '>>' -- Set string to use for wrapped line indication
-opt.shellslash = true -- Use forward slashes for shell commands (mainly affects Windows)
+if vim.fn.has('win32') == 1 then
+  opt.shellslash = true -- Use forward slashes for shell commands
+end
 opt.signcolumn = 'yes' -- Always show the sign column, prevents text shifting
 opt.smartindent = true -- Automatically inserts one extra level of indentation in some cases
 opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal GUI
