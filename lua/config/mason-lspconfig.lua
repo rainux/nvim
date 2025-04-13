@@ -1,18 +1,19 @@
+-- This file seems not be used by LazyVim
+
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {
-    'diagnosticls',
-    'gopls',
-    'grammarly',
-    'graphql',
-    'rust_analyzer',
-    'lua_ls',
-    'pyright',
-    'tailwindcss',
-    'tsserver',
-    'vimls',
-    'yamlls',
-  },
+  -- ensure_installed = {
+  --   'svelte-language-server',
+  --   'diagnosticls',
+  --   'gopls',
+  --   'grammarly',
+  --   'graphql',
+  --   'lua_ls',
+  --   'tailwindcss',
+  --   'tsserver',
+  --   'vimls',
+  --   'yamlls',
+  -- },
 })
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -68,6 +69,7 @@ require('mason-lspconfig').setup_handlers({
   function(server_name) -- default handler (optional)
     require('lspconfig')[server_name].setup(options)
   end,
+
   ['tsserver'] = function()
     local function organize_imports()
       local params = {
@@ -91,20 +93,20 @@ require('mason-lspconfig').setup_handlers({
     options = vim.tbl_extend('force', options, require('lsp/lua_ls'))
     require('lspconfig').lua_ls.setup(options)
   end,
-  ['rust_analyzer'] = function()
-    -- TODO: Broken after migrate to mason
-    options = vim.tbl_extend('force', options, require('lsp/rust_analyzer'))
-    local server = require('lspconfig').rust_analyzer
-    -- Initialize the LSP via rust-tools instead
-    require('rust-tools').setup({
-      -- The "server" property provided in rust-tools setup function are the
-      -- settings rust-tools will provide to lspconfig during init.
-      -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
-      -- with the user's own settings (opts).
-      -- server = vim.tbl_deep_extend('force', server:get_default_options(), options),
-    })
-    -- server:attach_buffers()
-    -- Only if standalone support is needed
-    -- require('rust-tools').start_standalone_if_required()
-  end,
+  -- ['rust_analyzer'] = function()
+  --   -- TODO: Broken after migrate to mason
+  --   options = vim.tbl_extend('force', options, require('lsp/rust_analyzer'))
+  --   local server = require('lspconfig').rust_analyzer
+  --   -- Initialize the LSP via rust-tools instead
+  --   require('rust-tools').setup({
+  --     -- The "server" property provided in rust-tools setup function are the
+  --     -- settings rust-tools will provide to lspconfig during init.
+  --     -- We merge the necessary settings from nvim-lsp-installer (server:get_default_options())
+  --     -- with the user's own settings (opts).
+  --     -- server = vim.tbl_deep_extend('force', server:get_default_options(), options),
+  --   })
+  --   -- server:attach_buffers()
+  --   -- Only if standalone support is needed
+  --   -- require('rust-tools').start_standalone_if_required()
+  -- end,
 })

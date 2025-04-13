@@ -55,133 +55,146 @@ end
 --  --------------------------------------------------------------------------------------------------------------- }}}2
 
 local primary_nmappings = {
-  c = {
-    name = 'Convenient Commands',
-    t = { '<cmd>Telescope<CR>', 'Telescope' },
-    b = { '<cmd>Telescope buffers<CR>', 'Telescope Buffers' },
-    f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
-    g = { '<cmd>Telescope live_grep<CR>', 'Telescope Live Grep' },
-    h = { '<cmd>Telescope help_tags<CR>', 'Telescope Help Tags' },
-    k = { '<cmd>Telescope keymaps<CR>', 'Telescope Keymaps' },
-    l = { '<cmd>Telescope colorscheme<CR>', 'Telescope Color Scheme' },
-    r = { '<cmd>Telescope oldfiles<CR>', 'Open Recent File' },
-  },
-  d = {
-    c = { copy_diagnostic_to_clipboard, 'Copy Diagnostic to Clipboard' },
-  },
-  g = {
-    name = 'Git',
-    a = {
-      c = { ':Git commit --amend --verbose<CR>', 'Amend Commit Verbose' },
-    },
-    b = { ':Git blame<CR>', 'Blame' },
-    c = { ':Git commit --verbose<CR>', 'Commit Verbose' },
-    d = { ':Gvdiff<CR>', 'Vertical Diff' },
-    e = { ':Gedit<CR>', 'Edit' },
-    f = { ':Git difftool<CR>', 'Diff Tool' },
-    g = { ':Ggrep<Space>', 'Grep' },
-    h = { ':GH<CR>', 'Open the link of current line on GitHub' },
-    i = { ':Gsplit! diff<CR><C-W>_', 'Split Diff' },
-    k = { ':Gvdiff HEAD<CR><C-W>_', 'Vertical Diff HEAD' },
-    l = { ':Gclog <CR>', 'Log' },
-    m = { ':Git mergetool<CR>', 'Merge Tool' },
-    r = { ':Gread<CR>', 'Read' },
-    s = { ':Neogit<CR>', 'Status' },
-    w = { ':Gwrite<CR>', 'Write' },
-  },
-  l = {
-    i = { '<cmd>LspInfo<CR>', 'LSP Info' },
-    r = { '<cmd>LspRestart<CR>', 'LSP Restart' },
-    I = { '<cmd>LspInstallInfo<CR>', 'LSP Installer Info' },
-  },
-  n = {
-    t = { '<cmd>NvimTreeToggle<CR>', 'Toggle Nvim Tree' },
-    f = { '<cmd>NvimTreeFindFile<CR>', 'Nvim Tree Find File' },
-  },
-  q = {
-    t = { '<cmd>tabclose<CR>', 'Close Tab' },
-  },
-  r = {
-    g = { '<cmd>execute "Rg " . input("Rg search for pattern: ", "<C-R><C-W>")<CR>', 'Rg Search' },
-  },
-  t = {
-    name = 'Toggles',
-    a = { '<cmd>ALEToggle<CR>', 'ALE Linting' },
-    c = { toggle_columns, 'Columns' },
-    h = { '<cmd>set hlsearch!<CR>', 'Highlight Search' },
-    i = { '<cmd>IndentBlanklineToggle<CR>', 'Indent Blankline' },
-    _ = { toggle_subword_motion, 'Toggle subword motion and textobject' },
-    l = { '<cmd>TagbarToggle<CR>', 'Tagbar' },
-    o = { '<cmd>Outline<CR>', 'Outline' },
-    s = { '<cmd>set spell!<CR>', 'Spell Check' },
-    w = { '<cmd>set wrap!<CR>', 'Wrap' },
-  },
+  mode = { 'n' },
 
-  -- Historical conventions  -------------------------------------------------------------------------------------- {{{1
-  ['*'] = { substitute_current_word, 'Substitute current word under the cursor' },
+  { ',c', group = 'Convenient Commands' },
+  { ',ct', '<cmd>Telescope<CR>', desc = 'Telescope' },
+  { ',cb', '<cmd>Telescope buffers<CR>', desc = 'Telescope Buffers' },
+  { ',cf', '<cmd>Telescope find_files<CR>', desc = 'Find Files' },
+  { ',cg', '<cmd>Telescope live_grep<CR>', desc = 'Telescope Live Grep' },
+  { ',ch', '<cmd>Telescope help_tags<CR>', desc = 'Telescope Help Tags' },
+  { ',ck', '<cmd>Telescope keymaps<CR>', desc = 'Telescope Keymaps' },
+  { ',cl', '<cmd>Telescope colorscheme<CR>', desc = 'Telescope Color Scheme' },
+  { ',cr', '<cmd>Telescope oldfiles<CR>', desc = 'Open Recent File' },
 
-  ['cd'] = { ':lcd %:p:h<CR>', 'Change buffer directory to parent dir of current file' },
+  { ',dc', copy_diagnostic_to_clipboard, desc = 'Copy Diagnostic to Clipboard' },
 
-  ['sr'] = { ':SCCompileRun<CR>', 'Compile and Run with SingleCompile' },
-  ['sc'] = { ':SCCompile<CR>', 'Compile with SingleCompile' },
+  { ',g', group = 'Git' },
+  { ',gac', ':Git commit --amend --verbose<CR>', desc = 'Amend Commit Verbose' },
+  { ',gb', ':Git blame<CR>', desc = 'Blame' },
+  { ',gc', ':Git commit --verbose<CR>', desc = 'Commit Verbose' },
+  { ',gd', ':Gvdiff<CR>', desc = 'Vertical Diff' },
+  { ',ge', ':Gedit<CR>', desc = 'Edit' },
+  { ',gf', ':Git difftool<CR>', desc = 'Diff Tool' },
+  { ',gg', ':Ggrep<Space>', desc = 'Grep' },
+  { ',gh', ':GH<CR>', desc = 'Open the link of current line on GitHub' },
+  { ',gi', ':Gsplit! diff<CR><C-W>_', desc = 'Split Diff' },
+  { ',gk', ':Gvdiff HEAD<CR><C-W>_', desc = 'Vertical Diff HEAD' },
+  { ',gl', ':Gclog <CR>', desc = 'Log' },
+  { ',gm', ':Git mergetool<CR>', desc = 'Merge Tool' },
+  { ',gr', ':Gread<CR>', desc = 'Read' },
+  { ',gs', ':Neogit<CR>', desc = 'Status' },
+  { ',gw', ':Gwrite<CR>', desc = 'Write' },
 
-  ['cw'] = { ':cwindow<CR>', 'Open quickfix window' },
-  ['cq'] = { ':cclose<CR>', 'Close quickfix window' },
+  { ',li', '<cmd>LspInfo<CR>', desc = 'LSP Info' },
+  { ',lr', '<cmd>LspRestart<CR>', desc = 'LSP Restart' },
+  { ',lI', '<cmd>LspInstallInfo<CR>', desc = 'LSP Installer Info' },
 
-  ['lw'] = { ':lwindow<CR>', 'Open location window' },
-  ['lq'] = { ':lclose<CR>', 'Close location window' },
+  { ',nt', '<cmd>Neotree toggle<CR>', desc = 'Toggle Neo-tree' },
+  { ',nf', '<cmd>Neotree filesystem reveal<CR>', desc = 'Neo-tree Reveal File' },
 
-  [','] = { ':cc<CR>', 'Jump to current error in quickfix list' },
-  ['.'] = { ':cnext<CR>', 'Jump to next error in quickfix list' },
-  ['m'] = { ':cNext<CR>', 'Jump to prev error in quickfix list' },
+  { ',qt', '<cmd>tabclose<CR>', desc = 'Close Tab' },
 
-  ['<'] = { ':ll<CR>', 'Jump to current error in location list' },
-  ['>'] = { ':lnext<CR>', 'Jump to next error in location list' },
-  ['M'] = { ':lNext<CR>', 'Jump to prev error in location list' },
+  { ',rg', '<cmd>execute "Rg " . input("Rg search for pattern: ", "<C-R><C-W>")<CR>', desc = 'Rg Search' },
 
-  ['ff'] = { ':set ff=unix<CR>:%!fromdos<CR>gg=G:%s/\\s\\+$//ge<CR>', 'Format code' },
-  ['fc'] = { ':set ff=unix<CR>:%!fromdos<CR>:%s/\\s\\+$//ge<CR>', 'Clean code' },
-  --  ------------------------------------------------------------------------------------------------------------- }}}1
+  { ',t', group = 'Toggles' },
+  { ',ta', '<cmd>ALEToggle<CR>', desc = 'ALE Linting' },
+  { ',tc', toggle_columns, desc = 'Columns' },
+  { ',th', '<cmd>set hlsearch!<CR>', desc = 'Highlight Search' },
+  { ',ti', '<cmd>IndentBlanklineToggle<CR>', desc = 'Indent Blankline' },
+  { ',t_', toggle_subword_motion, desc = 'Toggle subword motion and textobject' },
+  { ',tl', '<cmd>TagbarToggle<CR>', desc = 'Tagbar' },
+  { ',to', '<cmd>Outline<CR>', desc = 'Outline' },
+  { ',ts', '<cmd>set spell!<CR>', desc = 'Spell Check' },
+  { ',tw', '<cmd>set wrap!<CR>', desc = 'Wrap' },
+
+  { ',*', substitute_current_word, desc = 'Substitute current word under the cursor' },
+  { ',cd', ':lcd %:p:h<CR>', desc = 'Change buffer directory to parent dir of current file' },
+  { ',sr', ':SCCompileRun<CR>', desc = 'Compile and Run with SingleCompile' },
+  { ',sc', ':SCCompile<CR>', desc = 'Compile with SingleCompile' },
+
+  { ',cw', ':cwindow<CR>', desc = 'Open quickfix window' },
+  { ',cq', ':cclose<CR>', desc = 'Close quickfix window' },
+
+  { ',lw', ':lwindow<CR>', desc = 'Open location window' },
+  { ',lq', ':lclose<CR>', desc = 'Close location window' },
+
+  { ',,', ':cc<CR>', desc = 'Jump to current error in quickfix list' },
+  { ',.', ':cnext<CR>', desc = 'Jump to next error in quickfix list' },
+  { ',m', ':cNext<CR>', desc = 'Jump to prev error in quickfix list' },
+
+  { ',<', ':ll<CR>', desc = 'Jump to current error in location list' },
+  { ',>', ':lnext<CR>', desc = 'Jump to next error in location list' },
+  { ',M', ':lNext<CR>', desc = 'Jump to prev error in location list' },
+
+  { ',ff', ':set ff=unix<CR>:%!fromdos<CR>gg=G:%s/\\s\\+$//ge<CR>', desc = 'Format code' },
+  { ',fc', ':set ff=unix<CR>:%!fromdos<CR>:%s/\\s\\+$//ge<CR>', desc = 'Clean code' },
 }
 
 local primary_vmappings = {}
 
 local secondary_nmappings = {
-  ['ftu'] = { ':set fenc=utf8<CR>:w<CR>', 'Convert buffer to UTF-8 encoding' },
-  ['ftg'] = { ':set fenc=gbk<CR>:w<CR>', 'Convert buffer to GBK encoding' },
+  mode = { 'n' },
 
-  ['str'] = {
+  { '\\ftu', ':set fenc=utf8<CR>:w<CR>', desc = 'Convert buffer to UTF-8 encoding' },
+  { '\\ftg', ':set fenc=gbk<CR>:w<CR>', desc = 'Convert buffer to GBK encoding' },
+
+  {
+    '\\str',
     [[:%s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>]],
-    'Convert double quotation string to single quotation',
+    desc = 'Convert double quotation string to single quotation',
   },
-  ['sym'] = { [[:%s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>]], 'Convert String to Symbol for Ruby' },
-  ['hash'] = { [[:%s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>]], "Convert hash to Ruby 1.9's JSON-like style" },
-  ['url'] = { [[:%s/https\?:\/\/[^/]\+\/\@=//gce<CR>]], 'Convert url to a relative path' },
+  {
+    '\\sym',
+    [[:%s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>]],
+    desc = 'Convert String to Symbol for Ruby',
+  },
+  {
+    '\\hash',
+    [[:%s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>]],
+    desc = "Convert hash to Ruby 1.9's JSON-like style",
+  },
+  { '\\url', [[:%s/https\?:\/\/[^/]\+\/\@=//gce<CR>]], desc = 'Convert url to a relative path' },
 }
 
 local secondary_vmappings = {
-  ['str'] = {
+  mode = { 'v' },
+
+  {
+    '\\str',
     [[:s/[\\]\@<!\(["]\)\(\(\(#{\)\@<![^"]\)\+\)\1/'\2'/gce<CR>]],
-    'Convert selected double quotation string to single quotation',
+    desc = 'Convert selected double quotation string to single quotation',
   },
-  ['sym'] = { [[:s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>]], 'Convert String to Symbol for Ruby' },
-  ['hash'] = { [[:s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>]], "Convert hash to Ruby 1.9's JSON-like style" },
-  ['url'] = { [[:s/https\?:\/\/[^/]\+\/\@=//gce<CR>]], 'Convert url to a relative path' },
+  {
+    '\\sym',
+    [[:s/[\\]\@<!\(['"]\)\([0-9A-Za-z_$]\+\)\1/:\2/gce<CR>]],
+    desc = 'Convert String to Symbol for Ruby',
+  },
+  {
+    '\\hash',
+    [[:s/\%(\w\|:\)\@1<!:\(\w\+\) *=> */\1: /gce<CR>]],
+    desc = "Convert hash to Ruby 1.9's JSON-like style",
+  },
+  { '\\url', [[:s/https\?:\/\/[^/]\+\/\@=//gce<CR>]], desc = 'Convert url to a relative path' },
 }
 
 local raw_nmappings = {
-  ['zf'] = { '<Plug>Chalk', 'Create fold at operator movement' },
-  ['zF'] = { '<Plug>ChalkRange', 'Create fold for specified number of lines' },
-  ['Zf'] = { '<Plug>SingleChalk', 'Create single (opening) fold marker at current level or specified count' },
-  ['ZF'] = { '<Plug>SingleChalkUp', 'Create single (opening) fold marker at next level or specified count' },
-  ['=z'] = { '<Plug>ChalkUp', 'Increment current fold level' },
-  ['-z'] = { '<Plug>ChalkDown', 'Decrement current fold level' },
+  mode = { 'n' },
+
+  { 'zf', '<Plug>Chalk', desc = 'Create fold at operator movement' },
+  { 'zF', '<Plug>ChalkRange', desc = 'Create fold for specified number of lines' },
+  { 'Zf', '<Plug>SingleChalk', desc = 'Create single (opening) fold marker at current level or specified count' },
+  { 'ZF', '<Plug>SingleChalkUp', desc = 'Create single (opening) fold marker at next level or specified count' },
+  { '=z', '<Plug>ChalkUp', desc = 'Increment current fold level' },
+  { '-z', '<Plug>ChalkDown', desc = 'Decrement current fold level' },
 }
 
 local raw_vmappings = {
-  ['zf'] = { '<Plug>Chalk', 'Create fold at visual selection' },
-  ['=z'] = { '<Plug>ChalkUp', 'Increment levels in selection' },
-  ['-z'] = { '<Plug>ChalkDown', 'Decrement levels in selection' },
+  mode = { 'v' },
+
+  { 'zf', '<Plug>Chalk', desc = 'Create fold at visual selection' },
+  { '=z', '<Plug>ChalkUp', desc = 'Increment levels in selection' },
+  { '-z', '<Plug>ChalkDown', desc = 'Decrement levels in selection' },
 }
 
 return {
@@ -190,12 +203,12 @@ return {
     'folke/which-key.nvim',
     config = function()
       local wk = require('which-key')
-      wk.register(primary_nmappings, { mode = 'n', prefix = ',' })
-      wk.register(primary_vmappings, { mode = 'v', prefix = ',' })
-      wk.register(secondary_nmappings, { mode = 'n', prefix = '\\' })
-      wk.register(secondary_vmappings, { mode = 'v', prefix = '\\' })
-      wk.register(raw_nmappings, { mode = 'n' })
-      wk.register(raw_vmappings, { mode = 'v' })
+      wk.add(primary_nmappings)
+      wk.add(primary_vmappings)
+      wk.add(secondary_nmappings)
+      wk.add(secondary_vmappings)
+      wk.add(raw_nmappings)
+      wk.add(raw_vmappings)
     end,
   },
 }

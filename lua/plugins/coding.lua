@@ -1,6 +1,5 @@
 return {
   {
-    -- A completion plugin for neovim coded in Lua.
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       local cmp = require('cmp')
@@ -15,14 +14,11 @@ return {
       })
     end,
   },
-  -- A dictionary completion source for nvim-cmp
   {
     'uga-rosa/cmp-dictionary',
     dependencies = {
       'nvim-cmp',
-      opts = function(_, opts)
-        table.insert(opts.sources, { name = 'dictionary', keyword_length = 2 })
-      end,
+      opts = function(_, opts) table.insert(opts.sources, { name = 'dictionary', keyword_length = 2 }) end,
     },
     opts = {
       paths = { vim.fn.stdpath('config') .. '/assets/english.dict' },
@@ -34,4 +30,15 @@ return {
       },
     },
   },
+
+  -- autopairs for neovim written in lua
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+  },
+
+  -- Support for V syntax highlighting in Vim
+  { 'ollykel/v-vim' },
+  { 'tpope/vim-rails' },
 }

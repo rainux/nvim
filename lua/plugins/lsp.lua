@@ -6,5 +6,19 @@ return {
       -- Disable <C-k> for nvim-cmp
       keys['<c-k>'] = { false }
     end,
+
+    opts = {
+      servers = {
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'standard',
+              },
+            },
+          },
+        },
+      },
+    },
   },
 }

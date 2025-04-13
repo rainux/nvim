@@ -10,7 +10,10 @@ return {
   -- Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation.
   { 'chrisgrieser/nvim-spider', lazy = true },
   -- Bundle of more than 30 new text objects for Neovim.
-  { 'chrisgrieser/nvim-various-textobjs', lazy = false, opts = { useDefaultKeymaps = false } },
+  { 'chrisgrieser/nvim-various-textobjs', lazy = false, opts = { keymaps = { useDefaults = false } } },
+
+  -- Automatic indentation style detection for Neovim
+  { 'nmac427/guess-indent.nvim', config = true },
 
   -- Better fold markers
   {
@@ -21,9 +24,7 @@ return {
 
       vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
         pattern = { '*.vim', '*.lua', '*.ts' },
-        callback = function(autocmd)
-          vim.api.nvim_buf_set_var(autocmd.buf, 'chalk_space_before', 1)
-        end,
+        callback = function(autocmd) vim.api.nvim_buf_set_var(autocmd.buf, 'chalk_space_before', 1) end,
       })
     end,
   },
